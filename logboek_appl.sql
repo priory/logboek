@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 aug 2019 om 11:06
+-- Gegenereerd op: 26 aug 2019 om 11:45
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.1
 
@@ -27,12 +27,23 @@ USE `logboek_appl`;
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `cohort`
+--
+
+CREATE TABLE `cohort` (
+  `Cohort_ID` int(11) NOT NULL,
+  `Cohort` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `groepen`
 --
 
 CREATE TABLE `groepen` (
   `Groep` int(11) NOT NULL,
-  `Level` tinyint(4) NOT NULL
+  `Level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -46,10 +57,35 @@ CREATE TABLE `leerlingen` (
   `voornaam` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `tussenvoegsel` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `achternaam` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `Cohort` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `Cohort` int(11) NOT NULL,
   `Groep_id` int(11) NOT NULL,
   `Level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `level`
+--
+
+CREATE TABLE `level` (
+  `Level` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `level`
+--
+
+INSERT INTO `level` (`Level`) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9);
 
 -- --------------------------------------------------------
 
@@ -66,22 +102,56 @@ CREATE TABLE `logs` (
   `voor_groep` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE `users` (
+  `user_ID` int(11) NOT NULL,
+  `user` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `wachtwoord` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `users`
+--
+
+INSERT INTO `users` (`user_ID`, `user`, `wachtwoord`) VALUES
+(1, 'Henk', 'henk123');
+
 --
 -- Indexen voor geëxporteerde tabellen
 --
 
 --
+-- Indexen voor tabel `cohort`
+--
+ALTER TABLE `cohort`
+  ADD PRIMARY KEY (`Cohort_ID`);
+
+--
 -- Indexen voor tabel `groepen`
 --
 ALTER TABLE `groepen`
-  ADD PRIMARY KEY (`Groep`);
+  ADD PRIMARY KEY (`Groep`),
+  ADD KEY `Level` (`Level`);
 
 --
 -- Indexen voor tabel `leerlingen`
 --
 ALTER TABLE `leerlingen`
   ADD PRIMARY KEY (`leerling_ID`),
-  ADD KEY `Groep_id` (`Groep_id`);
+  ADD KEY `Groep_id` (`Groep_id`),
+  ADD KEY `Level` (`Level`),
+  ADD KEY `Cohort` (`Cohort`);
+
+--
+-- Indexen voor tabel `level`
+--
+ALTER TABLE `level`
+  ADD PRIMARY KEY (`Level`);
 
 --
 -- Indexen voor tabel `logs`
@@ -92,36 +162,68 @@ ALTER TABLE `logs`
   ADD KEY `voor_leerling` (`voor_leerling`);
 
 --
+-- Indexen voor tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_ID`);
+
+--
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
+
+--
+-- AUTO_INCREMENT voor een tabel `cohort`
+--
+ALTER TABLE `cohort`
+  MODIFY `Cohort_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `groepen`
 --
 ALTER TABLE `groepen`
-  MODIFY `Groep` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Groep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `leerlingen`
 --
 ALTER TABLE `leerlingen`
-  MODIFY `leerling_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `leerling_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT voor een tabel `level`
+--
+ALTER TABLE `level`
+  MODIFY `Level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT voor een tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
 
 --
+-- Beperkingen voor tabel `groepen`
+--
+ALTER TABLE `groepen`
+  ADD CONSTRAINT `groepen_ibfk_1` FOREIGN KEY (`Level`) REFERENCES `level` (`Level`);
+
+--
 -- Beperkingen voor tabel `leerlingen`
 --
 ALTER TABLE `leerlingen`
-  ADD CONSTRAINT `leerlingen_ibfk_1` FOREIGN KEY (`Groep_id`) REFERENCES `groepen` (`Groep`);
+  ADD CONSTRAINT `leerlingen_ibfk_1` FOREIGN KEY (`Groep_id`) REFERENCES `groepen` (`Groep`),
+  ADD CONSTRAINT `leerlingen_ibfk_2` FOREIGN KEY (`Level`) REFERENCES `level` (`Level`),
+  ADD CONSTRAINT `leerlingen_ibfk_3` FOREIGN KEY (`Cohort`) REFERENCES `cohort` (`Cohort_ID`);
 
 --
 -- Beperkingen voor tabel `logs`
