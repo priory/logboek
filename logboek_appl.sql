@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 aug 2019 om 11:45
+-- Gegenereerd op: 26 aug 2019 om 12:21
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.1
 
@@ -35,6 +35,13 @@ CREATE TABLE `cohort` (
   `Cohort` varchar(25) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `cohort`
+--
+
+INSERT INTO `cohort` (`Cohort_ID`, `Cohort`) VALUES
+(1, '2017');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +52,13 @@ CREATE TABLE `groepen` (
   `Groep` int(11) NOT NULL,
   `Level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `groepen`
+--
+
+INSERT INTO `groepen` (`Groep`, `Level`) VALUES
+(17, 9);
 
 -- --------------------------------------------------------
 
@@ -61,6 +75,15 @@ CREATE TABLE `leerlingen` (
   `Groep_id` int(11) NOT NULL,
   `Level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `leerlingen`
+--
+
+INSERT INTO `leerlingen` (`leerling_ID`, `voornaam`, `tussenvoegsel`, `achternaam`, `Cohort`, `Groep_id`, `Level`) VALUES
+(5, 'Joël', 'van', 'Eeveren', 1, 17, 9),
+(6, 'Vladik', '', 'Packo', 1, 17, 9),
+(7, 'Thijmen', 'van der', 'Avoort', 1, 17, 9);
 
 -- --------------------------------------------------------
 
@@ -97,10 +120,17 @@ CREATE TABLE `logs` (
   `logs_ID` int(11) NOT NULL,
   `bericht` text COLLATE utf8_unicode_ci NOT NULL,
   `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `voor_leerling` int(11) DEFAULT NULL,
   `voor_groep` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `logs`
+--
+
+INSERT INTO `logs` (`logs_ID`, `bericht`, `datum`, `user_id`, `voor_leerling`, `voor_groep`) VALUES
+(2, 'Groep begint aan een redelijke start', '2019-08-26 10:21:23', NULL, NULL, 17);
 
 -- --------------------------------------------------------
 
@@ -159,7 +189,8 @@ ALTER TABLE `level`
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`logs_ID`),
   ADD KEY `voor_groep` (`voor_groep`),
-  ADD KEY `voor_leerling` (`voor_leerling`);
+  ADD KEY `voor_leerling` (`voor_leerling`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexen voor tabel `users`
@@ -175,7 +206,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `cohort`
 --
 ALTER TABLE `cohort`
-  MODIFY `Cohort_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cohort_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `groepen`
@@ -187,7 +218,7 @@ ALTER TABLE `groepen`
 -- AUTO_INCREMENT voor een tabel `leerlingen`
 --
 ALTER TABLE `leerlingen`
-  MODIFY `leerling_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `leerling_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT voor een tabel `level`
@@ -199,7 +230,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -230,7 +261,8 @@ ALTER TABLE `leerlingen`
 --
 ALTER TABLE `logs`
   ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`voor_groep`) REFERENCES `groepen` (`Groep`),
-  ADD CONSTRAINT `logs_ibfk_2` FOREIGN KEY (`voor_leerling`) REFERENCES `leerlingen` (`leerling_ID`);
+  ADD CONSTRAINT `logs_ibfk_2` FOREIGN KEY (`voor_leerling`) REFERENCES `leerlingen` (`leerling_ID`),
+  ADD CONSTRAINT `logs_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
