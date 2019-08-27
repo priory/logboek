@@ -1,0 +1,13 @@
+<?php
+
+$dbname = 'dbname';
+$username = 'user';
+$passwd = 'password';
+
+$dsn = 'mysql:dbname=' . $dbname . ';host=localhost';
+
+try {
+    $pdo = new PDO($dsn, $username, $passwd);
+} catch (PDOException $e) {
+    echo 'Connection failed: '.$e->getMessage();
+}
