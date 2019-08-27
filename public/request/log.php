@@ -1,14 +1,37 @@
 <?php
-
+$db = new PDO("mysql:host=localhost;dbname=logboek_appl", "admin", "admin");
 switch ($_POST['method']) {
     case 'GET':
-        $group = $_POST['groep'];
-        $leerling = $_POST['leerling'];
-        $id = $_POST['id'];
+        if(!isset($_POST['groep'])) {
+            $leerling = $_POST['leerling'];
+            $query = "SELECT * FROM `logs` WHERE voor_leerling = $leerling";
+        } else {
+            $groep = $_POST['groep'];
+            $query = "SELECT * FROM `logs` WHERE voor_groep = $groep";
+        }
+        
+        
+        //$id = $_POST['id'];
 
-        $logs = ['id' => 1, 'content' => 'mock', 'date' => '2019-08-27 12:00:00'];
+       
 
+        
+        
+
+        $result = $db->query($query);
+
+        $logs = [];
+        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            
+            $logs[] = ['id' => $row['logs_ID'],'content' => $row['bericht'], 'date' => $row['datum']];
+            
+            
+        }
         echo json_encode($logs);
+
+        
+        
+        
 
         break;
     case 'STORE':
@@ -22,13 +45,19 @@ switch ($_POST['method']) {
         $id = $_POST['id'];
         $content = $_POST['content'];
 
+        $query = "UPDATE `logs` SET `bericht` = '$content' WHERE logs_ID = $id";
+        $result = $db->query($query);
         echo true;
 
         break;
     case 'DELETE':
         $id = $_POST['id'];
-
-        echo true;
-
+        
+        $query = "DELETE FROM `logs` WHERE logs_ID = $id";
+        $result = $db->query($query);
+        if($result) {
+            echo $id;
+        }
         break;
 }
+?>

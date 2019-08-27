@@ -8,6 +8,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script>
+    function getLeerling(leerling, callback){
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'GET', leerling } }).then(r => callback(JSON.parse(r)));
+    }
+
+    function getGroep(groep, callback){
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'GET', groep } }).then(r => callback(JSON.parse(r)));
+    }
+    function logDelete(id, callback) {
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'DELETE', id } }).then(r => callback(r));
+    }
+
+    function logUpdate(id, content ,callback) {
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'UPDATE', id, content } }).then(r => callback(r));
+    }
+
+
+
     $(function () {
         
     });

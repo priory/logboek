@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Logboek ROC-MN</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<?php 
+    $root = __DIR__ . '\..\\';
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    require_once $root . 'resources\\layouts\\head.php';
+?>
+<script>
+    $(function () {
+        getLeerling(<?= $_GET['leerling']?>, renderLogs);
+    });
+
+    function removeLog(id) {
+        $('#log-'+id).remove(); 
+    }
+
+    function renderLogs(data) {
+        for (let i of data) {
+
+            $("table").append(
+`
+<div class="row" id = "log-${i.id}">
+    <div class="input-field col s6">            
+        <strong>${i.date}: </strong>
+        <textarea class="content">${i.content}</textarea>
+        <button onclick="logDelete(${i.id}, removeLog)">DELETE</button>
+        <button onclick="logDelete(${i.id}, removeLog)">UPDATE</button>
+    </div>
+</div>
+`);
+
+        }
+    }
+</script>
 </head>
 <body>
 
@@ -20,7 +43,7 @@
         SELECT leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
         FROM `leerlingen`
         INNER JOIN `cohort` ON leerlingen.Cohort=cohort.Cohort_ID
-        WHERE leerlingen.leerling_ID = $_GET[id]";
+        WHERE leerlingen.leerling_ID = $_GET[leerling]";
 
         $table[] = "
             <table class='striped'>
@@ -64,5 +87,6 @@
     ?>
     <button><a href="kaart.php">Kaart</a></button>
     <button><a href="javascript:history.back()">Terug</a></button>
+    
 </body>
 </html>

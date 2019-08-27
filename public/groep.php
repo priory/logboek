@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Logboek ROC-MN</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<?php 
+    $root = __DIR__ . '\..\\';
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    require_once $root . 'resources\\layouts\\head.php';
+?>
+<script>
+    $(function () {
+        getGroep(<?= $_GET['groep']?>, renderLogs);
+    });
+
+    function removeLog(id) {
+        $('#log-'+id).remove();
+        console.log('DOETEHEIT');
+    }
+
+    function updateLog(id) {
+        alert('Succesvol geüpdatet')
+    }
+
+    function renderLogs(data) {
+        for (let i of data) {
+
+            $("table").append(`
+                
+            <div class="row" id = "log-${i.id}">
+                <div class="input-field col s6">            
+                    <strong>${i.date}: </strong>
+                    <textarea class="content">${i.content}</textarea>
+                    <button onclick="logDelete(${i.id}, removeLog)">DELETE</button>
+                    <button onclick="logUpdate(${i.id}, $('#log-${i.id} textarea').val(), updateLog)">UPDATE</button>
+                </div>
+            </div>
+            `);
+        }
+    }
+</script>
 </head>
 <body>
 
@@ -20,7 +47,7 @@
         SELECT leerlingen.leerling_ID, leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
         FROM `leerlingen`
         INNER JOIN `cohort` ON leerlingen.Cohort=cohort.Cohort_ID
-        WHERE leerlingen.Groep_id = $_GET[id]";
+        WHERE leerlingen.Groep_id = $_GET[groep]";
 
         $table[] = "
             <table class='striped'>
@@ -47,7 +74,7 @@
                            <td>" . $row["Groep_id"] . "</td>
                            <td>" . $row["Level"] . "</td>
                            <td>" . $row["Cohort"] . "</td>
-                           <td><a href='leerling.php?id=". $row['leerling_ID']. "'>log</a></td>
+                           <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
                        </tr>";
             }
             echo "</table>";
