@@ -1,12 +1,12 @@
 <?php 
-    session_start();
+    $root = __DIR__ . '\..\\';
+
+    require_once $root . 'app\\guest.php';
 ?>
 
 <html>
     <head>
-        <?php 
-            $root = __DIR__ . '\..\\';
-
+        <?php             
             require_once $root . 'resources\\layouts\\head.php';
         ?>
 
