@@ -1,8 +1,12 @@
+<?php 
+$root = __DIR__ . '\..\\';
+require $root.'app/pdo.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <?php 
-    $root = __DIR__ . '\..\\';
+    
 
     require_once $root . 'resources\\layouts\\head.php';
 ?>
@@ -63,24 +67,20 @@
                     </tr>
                 </thead>";
 
-        $result = mysqli_query($conn, $sqlgroepen) or die(mysqli_error($conn));
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $table[] = "<tr>
-                           <td>" . $row["voornaam"] . "</td>
-                           <td>" . $row["tussenvoegsel"] . "</td>
-                           <td>" . $row["achternaam"] . "</td>
-                           <td>" . $row["Groep_id"] . "</td>
-                           <td>" . $row["Level"] . "</td>
-                           <td>" . $row["Cohort"] . "</td>
-                           <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
-                       </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "Error";
+        $result = $pdo->query($sqlgroepen);
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $table[] = "<tr>
+                        <td>" . $row["voornaam"] . "</td>
+                        <td>" . $row["tussenvoegsel"] . "</td>
+                        <td>" . $row["achternaam"] . "</td>
+                        <td>" . $row["Groep_id"] . "</td>
+                        <td>" . $row["Level"] . "</td>
+                        <td>" . $row["Cohort"] . "</td>
+                        <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
+                    </tr>";
         }
+        echo "</table>";
+         
 
         echo "<div class='row'><div class='col s6'>";
         // Table aanmaken
