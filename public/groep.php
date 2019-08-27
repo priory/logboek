@@ -45,7 +45,6 @@ require $root.'app/pdo.php';
 <body>
 
     <?php
-        require '../app/connectie.php';
 
         $sqlgroepen = "
         SELECT leerlingen.leerling_ID, leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
