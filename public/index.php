@@ -18,10 +18,27 @@
                         unset($_SESSION['errors']);
                     }
                 ?>
+
+                $( 'input#user' ).keydown( function (e) {
+                    if ( e.keyCode === 13) {
+                        $( 'input#password' ).focus();
+                    }
+                } );
+
+                $( 'input#password' ).keydown( function (e) {
+                    if ( e.keyCode === 13) {
+                        document.form.submit();
+                    }
+                } );
             });
         </script>
     </head>
     <body>
+        <div class="row">
+            <div class="col m6 s12 offset-m3">
+                <h1 class="center">4A7A Logboek</h1>
+            </div>
+        </div>
         <div class="row">
             <form class="col m6 s12 offset-m3" name="form" method="POST" action="./login.php" onsubmit="return false;">
                 <div class="row">
