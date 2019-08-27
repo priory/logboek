@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 app/connectie.php
+=======
+app/connectie.php
+app/pdo.php
+>>>>>>> 13fa3ea253abcf4afcad1fa0a0fd63c6712348e3
