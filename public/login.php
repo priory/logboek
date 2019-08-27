@@ -27,5 +27,6 @@ if ($result[0]['wachtwoord'] != $password) {
     header('Location: index.php'); die;
 }
 
-$_SESSION['user'] = $result['user_ID'];
+$_SESSION['user'] = $result[0]['user_ID'];
+
 header('Location: kaart.php');
