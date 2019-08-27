@@ -36,7 +36,7 @@
     <body>
         <div class="row">
             <div class="col m6 s12 offset-m3">
-                <h1 class="center">4A7A Logboek</h1>
+                <h1 class="center">Logboek</h1>
             </div>
         </div>
         <div class="row">

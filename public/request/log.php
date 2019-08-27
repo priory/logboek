@@ -1,5 +1,9 @@
 <?php
-$db = new PDO("mysql:host=localhost;dbname=logboek_appl", "admin", "admin");
+
+$root = __DIR__ . '\..\\..\\';
+
+require_once $root . 'app\\pdo.php';
+
 switch ($_POST['method']) {
     case 'GET':
         if(!isset($_POST['groep'])) {
@@ -10,15 +14,7 @@ switch ($_POST['method']) {
             $query = "SELECT * FROM `logs` WHERE voor_groep = $groep";
         }
         
-        
-        //$id = $_POST['id'];
-
-       
-
-        
-        
-
-        $result = $db->query($query);
+        $result = $pdo->query($query);
 
         $logs = [];
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -46,7 +42,7 @@ switch ($_POST['method']) {
         $content = $_POST['content'];
 
         $query = "UPDATE `logs` SET `bericht` = '$content' WHERE logs_ID = $id";
-        $result = $db->query($query);
+        $result = $pdo->query($query);
         echo true;
 
         break;
@@ -54,7 +50,7 @@ switch ($_POST['method']) {
         $id = $_POST['id'];
         
         $query = "DELETE FROM `logs` WHERE logs_ID = $id";
-        $result = $db->query($query);
+        $result = $pdo->query($query);
         if($result) {
             echo $id;
         }
