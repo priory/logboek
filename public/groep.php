@@ -42,11 +42,11 @@ require $root.'app/pdo.php';
                     
                 </div>
                 <div class="input-field col s2">
-                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown-log-${data.id}'><i class="material-icons">add</i></a>
+                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light grey' href='#' data-target='dropdown-log-${data.id}'><i class="material-icons">more_horiz</i></a>
 
                     <ul id='dropdown-log-${data.id}' class='dropdown-content'>
-                        <li><a onclick="logDelete(${data.id}, removeLog)">DELETE</a></li>
                         <li><a onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</a></li>
+                        <li><a class="red white-text" onclick="logDelete(${data.id}, removeLog)">DELETE</a></li>
                     </ul>
                 </div>
             </div>
@@ -76,6 +76,7 @@ require $root.'app/pdo.php';
         WHERE leerlingen.Groep_id = $_GET[groep]";
 
         $table[] = "
+            <h2>Groep ".$_GET['groep']."</h2>
             <table class='striped'>
                 <thead>
                     <tr>
@@ -115,7 +116,6 @@ require $root.'app/pdo.php';
     ?>
 	<textarea id="log-new">test</textarea>
 	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
-    <button><a href="kaart.php">Kaart</a></button>
     <div id="logboek"></div>
 </body>
 </html>
