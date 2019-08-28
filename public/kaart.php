@@ -39,48 +39,27 @@
                 position: absolute;
             }
                 .room#room-2-12 {
-                    width: 200px;
-                    height: 300px;
-                    top: 5px;
-                    left: 5px;
+                    width: 200px; height: 300px; top: 5px; left: 5px;
                 }
                 .room#room-2-16 {
-                    width: 300px;
-                    height: 250px;
-                    top: 5px;
-                    right: 105px;
+                    width: 300px; height: 250px; top: 5px; right: 105px;
                 }
                 .room#room-2-17 {
-                    width: 105px;
-                    height: 250px;
-                    top: 5px;
-                    right: 5px;
+                    width: 105px; height: 250px; top: 5px; right: 5px;
                 }
                 .room#room-2-08 {
-                    width: 250px;
-                    height: 250px;
-                    bottom: 5px;
-                    left: 5px;
+                    width: 250px; height: 250px; bottom: 5px; left: 5px;
                 }
                 .room#room-2-07 {
-                    width: 350px;
-                    height: 400px;
-                    bottom: 5px;
-                    left: 250px;
+                    width: 350px; height: 400px; bottom: 5px; left: 250px;
                 }
                 .room#room-2-06 {
-                    width: 350px;
-                    height: 400px;
-                    bottom: 5px;
-                    left: calc(250px + 350px - 5px);
+                    width: 350px; height: 400px; bottom: 5px; left: calc(250px + 350px - 5px);
                 }
                 .room#room-2-05 {
-                    width: 335px;
-                    height: 400px;
-                    bottom: 5px;
-                    left: calc(250px + 350px + 350px - 10px);
+                    width: 335px; height: 400px; bottom: 5px; left: calc(250px + 350px + 350px - 10px);
                 }
-                
+
             .cubicle {
                 border: 5px solid brown;
                 position: absolute;
@@ -92,10 +71,55 @@
                 }
 
                 .cubicle#cubicle-1 {
-                    width: 100px;
-                    height: 100px;
-                    top: 5px;
-                    left: 260px;
+                    width: 100px; height: 100px; bottom: 15px; left: 260px;
+                }
+                .cubicle#cubicle-2 {
+                    width: 100px; height: 100px; bottom: 155px; left: 260px;
+                }
+                .cubicle#cubicle-3 {
+                    width: 100px; height: 100px; bottom: 15px; left: 490px;
+                }
+                .cubicle#cubicle-4 {
+                    width: 100px; height: 100px; bottom: 155px; left: 490px;
+                }
+                .cubicle#cubicle-5 {
+                    width: 100px; height: 100px; bottom: 15px; left: 605px;
+                }
+                .cubicle#cubicle-6 {
+                    width: 100px; height: 100px; bottom: 155px; left: 605px;
+                }
+                .cubicle#cubicle-7 {
+                    width: 100px; height: 100px; bottom: 15px; left: 835px;
+                }
+                .cubicle#cubicle-8 {
+                    width: 100px; height: 100px; bottom: 155px; left: 835px;
+                }
+                .cubicle#cubicle-9 {
+                    width: 100px; height: 100px; bottom: 15px; left: 950px;
+                }
+                .cubicle#cubicle-10 {
+                    width: 100px; height: 100px; bottom: 155px; left: 950px;
+                }
+                .cubicle#cubicle-11 {
+                    width: 100px; height: 100px; bottom: 15px; left: 1165px;
+                }
+                .cubicle#cubicle-12 {
+                    width: 100px; height: 100px; bottom: 155px; left: 1165px;
+                }
+                .cubicle#cubicle-13 {
+                    width: 100px; height: 100px; top: 5px; right: 430px;
+                }
+                .cubicle#cubicle-14 {
+                    width: 100px; height: 100px; top: 5px; right: 560px;
+                }
+                .cubicle#cubicle-15 {
+                    width: 100px; height: 100px; top: 5px; right: 690px;
+                }
+                .cubicle#cubicle-16 {
+                    width: 100px; height: 100px; top: 5px; right: 820px;
+                }
+                .cubicle#cubicle-17 {
+                    width: 100px; height: 100px; top: 5px; right: 950px;
                 }
         </style>
 	</head>
@@ -131,6 +155,54 @@
             </div>
             <div id="cubicle-1" class="cubicle">
                 <h3>1</h3>
+            </div>
+            <div id="cubicle-2" class="cubicle">
+                <h3>2</h3>
+            </div>
+            <div id="cubicle-3" class="cubicle">
+                <h3>3</h3>
+            </div>
+            <div id="cubicle-4" class="cubicle">
+                <h3>4</h3>
+            </div>
+            <div id="cubicle-5" class="cubicle">
+                <h3>5</h3>
+            </div>
+            <div id="cubicle-6" class="cubicle">
+                <h3>6</h3>
+            </div>
+            <div id="cubicle-7" class="cubicle">
+                <h3>7</h3>
+            </div>
+            <div id="cubicle-8" class="cubicle">
+                <h3>8</h3>
+            </div>
+            <div id="cubicle-9" class="cubicle">
+                <h3>9</h3>
+            </div>
+            <div id="cubicle-10" class="cubicle">
+                <h3>10</h3>
+            </div>
+            <div id="cubicle-11" class="cubicle">
+                <h3>11</h3>
+            </div>
+            <div id="cubicle-12" class="cubicle">
+                <h3>12</h3>
+            </div>
+            <div id="cubicle-13" class="cubicle">
+                <h3>13</h3>
+            </div>
+            <div id="cubicle-14" class="cubicle">
+                <h3>14</h3>
+            </div>
+            <div id="cubicle-15" class="cubicle">
+                <h3>15</h3>
+            </div>
+            <div id="cubicle-16" class="cubicle">
+                <h3>16</h3>
+            </div>
+            <div id="cubicle-17" class="cubicle">
+                <h3>17</h3>
             </div>
         </div>
 	</body>
