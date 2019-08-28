@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <?php             
+        <?php          
             require_once $root . 'resources\\layouts\\head.php';
         ?>
 
@@ -22,9 +22,7 @@
                 width: 1280px;
                 height: 720px;
                 background-color: lightgray;
-                position: absolute;
-                left: 0px;
-                top: 0px;
+                position: relative;
             }
 
             .room, .cubicle {
@@ -130,7 +128,10 @@
         </script>
 	</head>
 	<body>
-        <div id="background">
+        <?php 
+            require_once $root . 'resources\\layouts\\nav.php';
+        ?>
+        <div id="background" class="center">
             <div id="room-2-12" class="room">
                 <h4>2.12</h4>
                 <h4>Docentenkamer</h4>
