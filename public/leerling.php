@@ -18,21 +18,24 @@ require $root.'app/pdo.php';
         $('#log-'+id).remove(); 
     }
 
+    function makeLog(data) {
+        $("table").append(`
+                
+            <div class="row" id = "log-${data.id}">
+                <div class="input-field col s10">            
+                    <strong>${data.date}: </strong>
+                    <textarea class="content materialize-textarea">${data.content}</textarea>
+                    <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${data.id}, removeLog)">DELETE</button>
+                    <button class="btn waves-effect waves-light red darken-1" onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</button>
+                </div>
+            </div>
+        `);
+        M.textareaAutoResize($('#log-'+data.id+' textarea'));
+    }
+
     function renderLogs(data) {
         for (let i of data) {
-
-            $("table").append(
-`
-<div class="row" id = "log-${i.id}">
-    <div class="input-field col s6">            
-        <strong>${i.date}: </strong>
-        <textarea class="content materialize-textarea ">${i.content}</textarea>
-        <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${i.id}, removeLog)">DELETE</button>
-        <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${i.id}, removeLog)">UPDATE</button>
-    </div>
-</div>
-`);
-
+            makeLog(i);
         }
     }
 </script>
