@@ -17,7 +17,6 @@ require $root.'app/pdo.php';
 <script>
     $(function () {
         getGroep(<?= $_GET['groep']?>, renderLogs);
-        
     });
 
     function removeLog(id) {
@@ -32,7 +31,7 @@ require $root.'app/pdo.php';
 	function addLog(id) {
         alert('Succesvol toegevoegd')
     }
-
+    // Voorbeeld {id,date,content}
     function makeLog(data) {
         $("table").append(`
                 
@@ -40,12 +39,17 @@ require $root.'app/pdo.php';
                 <div class="input-field col s10">            
                     <strong>${data.date}: </strong>
                     <textarea class="content materialize-textarea">${data.content}</textarea>
-                    <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${data.id}, removeLog)">DELETE</button>
-                    <button class="btn waves-effect waves-light red darken-1" onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</button>
+                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown1'><i class="material-icons">add</i></a>
+
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a onclick="logDelete(${data.id}, removeLog)">DELETE</a></li>
+                        <li><a onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</a></li>
+                    </ul>
                 </div>
             </div>
         `);
         M.textareaAutoResize($('#log-'+data.id+' textarea'));
+        $('#log-'+data.id+' a.dropdown-trigger').dropdown();
     }
 
     function renderLogs(data) {
@@ -54,7 +58,6 @@ require $root.'app/pdo.php';
         }
     }
 
-    
 </script>
 </head>
 <body>
@@ -110,5 +113,6 @@ require $root.'app/pdo.php';
 	<textarea id="log-new">test</textarea>
 	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
     <button><a href="kaart.php">Kaart</a></button>
+
 </body>
 </html>
