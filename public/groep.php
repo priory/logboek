@@ -21,7 +21,6 @@ require $root.'app/pdo.php';
 
     function removeLog(id) {
         $('#log-'+id).remove();
-        console.log('DOETEHEIT');
     }
 
     function updateLog(id) {
@@ -33,7 +32,8 @@ require $root.'app/pdo.php';
     }
     // Voorbeeld {id,date,content}
     function makeLog(data) {
-        $("body").append(`
+        console.log(data);
+        $("#logboek").append(`
                 
         <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
@@ -42,9 +42,9 @@ require $root.'app/pdo.php';
                     
                 </div>
                 <div class="input-field col s2">
-                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown1'><i class="material-icons">add</i></a>
+                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown-log-${data.id}'><i class="material-icons">add</i></a>
 
-                    <ul id='dropdown1' class='dropdown-content'>
+                    <ul id='dropdown-log-${data.id}' class='dropdown-content'>
                         <li><a onclick="logDelete(${data.id}, removeLog)">DELETE</a></li>
                         <li><a onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</a></li>
                     </ul>
@@ -101,21 +101,21 @@ require $root.'app/pdo.php';
                         <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
                     </tr>";
         }
-        echo "</table>";
-         
+        
 
         echo "<div class='row'><div class='col s6'>";
         // Table aanmaken
         if (isset($table)) {
             foreach ($table as $key => $table_done) {
                 echo $table_done;
+
             }
         };
-        echo "</div></div>";
+        echo "</table></div></div>";
     ?>
 	<textarea id="log-new">test</textarea>
 	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
     <button><a href="kaart.php">Kaart</a></button>
-
+    <div id="logboek"></div>
 </body>
 </html>
