@@ -27,7 +27,7 @@ require $root.'app/pdo.php';
     }
     // Voorbeeld {id,date,content}
     function makeLog(data) {
-        $("body").append(`
+        $("#logboek").append(`
                 
             <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
@@ -103,7 +103,8 @@ require $root.'app/pdo.php';
             }
         };
         echo "</div></div>";
+        
     ?>
-    
+    <div id="logboek"></div>
 </body>
 </html>

@@ -33,7 +33,7 @@ require $root.'app/pdo.php';
     // Voorbeeld {id,date,content}
     function makeLog(data) {
         console.log(data);
-        $("body").append(`
+        $("#logboek").append(`
                 
         <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
@@ -101,21 +101,21 @@ require $root.'app/pdo.php';
                         <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
                     </tr>";
         }
-        echo "</table>";
-         
+        
 
         echo "<div class='row'><div class='col s6'>";
         // Table aanmaken
         if (isset($table)) {
             foreach ($table as $key => $table_done) {
                 echo $table_done;
+
             }
         };
-        echo "</div></div>";
+        echo "</table></div></div>";
     ?>
 	<textarea id="log-new">test</textarea>
 	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
     <button><a href="kaart.php">Kaart</a></button>
-
+    <div id="logboek"></div>
 </body>
 </html>
