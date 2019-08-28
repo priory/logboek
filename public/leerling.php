@@ -39,6 +39,8 @@ require $root.'app/pdo.php';
 </head>
 <body>
     <?php
+        //require '../app/connectie.php';
+
     require_once('../resources/layouts/nav.php');
         $sqlleerlingen = "
         SELECT leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
