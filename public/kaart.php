@@ -7,16 +7,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <?php             
+            require_once $root . 'resources\\layouts\\head.php';
+        ?>
+
         <style>
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
-            }
-
-            h4 {
-                text-align: center;
-                vertical-align: middle;
             }
 
             #background {
@@ -28,12 +27,16 @@
                 top: 0px;
             }
 
+            .room, .cubicle {
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+
             .room {
                 border: 5px solid black;
                 position: absolute;
-            }
-            .room:hover {
-                background-color: white;
             }
                 .room#room-2-12 {
                     width: 200px;
@@ -77,6 +80,23 @@
                     bottom: 5px;
                     left: calc(250px + 350px + 350px - 10px);
                 }
+                
+            .cubicle {
+                border: 5px solid brown;
+                position: absolute;
+                color: brown;
+            }
+                .cubicle:hover {
+                    background-color: white;
+                    cursor: pointer;
+                }
+
+                .cubicle#cubicle-1 {
+                    width: 100px;
+                    height: 100px;
+                    top: 5px;
+                    left: 260px;
+                }
         </style>
 	</head>
 	<body>
@@ -108,6 +128,9 @@
             <div id="room-2-05" class="room">
                 <h4>2.05</h4>
                 <h4>Werkplekken</h4>
+            </div>
+            <div id="cubicle-1" class="cubicle">
+                <h3>1</h3>
             </div>
         </div>
 	</body>
