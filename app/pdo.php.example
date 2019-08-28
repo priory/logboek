@@ -1,8 +1,8 @@
 <?php
 
-$dbname = 'dbname';
-$username = 'user';
-$passwd = 'password';
+$dbname = 'logboek_appl';
+$username = 'root';
+$passwd = '';
 
 $dsn = 'mysql:dbname=' . $dbname . ';host=localhost';
 

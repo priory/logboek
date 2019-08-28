@@ -1,4 +1,7 @@
 <?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $root = __DIR__ . '\..\\';
 require $root.'app/pdo.php';
 ?>
@@ -23,6 +26,10 @@ require $root.'app/pdo.php';
     function updateLog(id) {
         alert('Succesvol geüpdatet')
     }
+	
+	function addLog(id) {
+        alert('Succesvol toegevoegd')
+    }
 
     function renderLogs(data) {
         for (let i of data) {
@@ -45,7 +52,7 @@ require $root.'app/pdo.php';
 <body>
 
     <?php
-        require '../app/connectie.php';
+        //require '../app/connectie.php';
 
         $sqlgroepen = "
         SELECT leerlingen.leerling_ID, leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
@@ -91,6 +98,8 @@ require $root.'app/pdo.php';
         };
         echo "</div></div>";
     ?>
+	<textarea id="log-new">test</textarea>
+	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
     <button><a href="kaart.php">Kaart</a></button>
 </body>
 </html>

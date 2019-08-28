@@ -55,5 +55,14 @@ switch ($_POST['method']) {
             echo $id;
         }
         break;
+		
+	case 'INSERT':
+        $content = $_POST['content'];
+
+        $query = "INSERT INTO `logs` (`bericht`) VALUES ('$content')";
+        $result = $pdo->query($query);
+        echo true;
+		
+		break;
 }
 ?>

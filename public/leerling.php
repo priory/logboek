@@ -40,7 +40,7 @@ require $root.'app/pdo.php';
 <body>
 
     <?php
-        require '../app/connectie.php';
+        //require '../app/connectie.php';
 
         $sqlleerlingen = "
         SELECT leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort

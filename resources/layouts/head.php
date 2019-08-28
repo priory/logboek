@@ -22,6 +22,9 @@
     function logUpdate(id, content ,callback) {
         $.ajax({url:'request/log.php', method:'POST', data: { method: 'UPDATE', id, content } }).then(r => callback(r));
     }
+	function logAdd(content ,callback) {
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'INSERT', content } }).then(r => callback(r));
+    }
 
 
 
