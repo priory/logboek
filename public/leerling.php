@@ -36,9 +36,9 @@ require $root.'app/pdo.php';
                     
                 </div>
                 <div class="input-field col s2">
-                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown1'><i class="material-icons">add</i></a>
+                    <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown-log-${data.id}'><i class="material-icons">add</i></a>
 
-                    <ul id='dropdown1' class='dropdown-content'>
+                    <ul id='dropdown-log-${data.id}' class='dropdown-content'>
                         <li><a onclick="logDelete(${data.id}, removeLog)">DELETE</a></li>
                         <li><a onclick="logUpdate(${data.id}, $('#log-${data.id} textarea').val(), updateLog)">UPDATE</a></li>
                     </ul>
