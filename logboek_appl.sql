@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 aug 2019 om 12:21
+-- Gegenereerd op: 28 aug 2019 om 12:52
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.1
 
@@ -81,7 +81,7 @@ CREATE TABLE `leerlingen` (
 --
 
 INSERT INTO `leerlingen` (`leerling_ID`, `voornaam`, `tussenvoegsel`, `achternaam`, `Cohort`, `Groep_id`, `Level`) VALUES
-(5, 'Joël', 'van', 'Eeveren', 1, 17, 9),
+(5, 'Joel', 'van', 'Eeveren', 1, 17, 9),
 (6, 'Vladik', '', 'Packo', 1, 17, 9),
 (7, 'Thijmen', 'van der', 'Avoort', 1, 17, 9);
 
@@ -130,7 +130,7 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`logs_ID`, `bericht`, `datum`, `user_id`, `voor_leerling`, `voor_groep`) VALUES
-(2, 'Groep begint aan een redelijke start', '2019-08-26 10:21:23', NULL, NULL, 17);
+(13, 'Joel Joel joel !', '2019-08-28 09:00:22', NULL, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
