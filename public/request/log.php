@@ -45,16 +45,19 @@ switch ($_POST['method']) {
         $id = $_POST['id'];
         $content = $_POST['content'];
 
-        $query = "UPDATE `logs` SET `bericht` = '$content' WHERE logs_ID = $id";
-        $result = $pdo->query($query);
+        $sth = $pdo->prepare("UPDATE `logs` SET `bericht` = :content; WHERE logs_ID = :id;");
+        $sth->bindValue(':content', $content, PDO::PARAM_STR);
+        $sth->bindValue(':id', $id, PDO::PARAM_STR);
+        $sth->execute();
         echo true;
 
         break;
     case 'DELETE':
         $id = $_POST['id'];
         
-        $query = "DELETE FROM `logs` WHERE logs_ID = $id";
-        $result = $pdo->query($query);
+        $sth = $pdo->prepare("DELETE FROM `logs` WHERE logs_ID = :id");
+        $sth->bindValue(':id', $id, PDO::PARAM_STR);
+        $sth->execute();
         if($result) {
             echo $id;
         }
