@@ -27,12 +27,15 @@ require $root.'app/pdo.php';
     }
     // Voorbeeld {id,date,content}
     function makeLog(data) {
-        $("table").append(`
+        $("body").append(`
                 
             <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
                     <strong>${data.date}: </strong>
                     <textarea class="content materialize-textarea">${data.content}</textarea>
+                    
+                </div>
+                <div class="input-field col s2">
                     <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light red' href='#' data-target='dropdown1'><i class="material-icons">add</i></a>
 
                     <ul id='dropdown1' class='dropdown-content'>
