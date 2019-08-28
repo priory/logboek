@@ -45,9 +45,9 @@ switch ($_POST['method']) {
         $id = $_POST['id'];
         $content = $_POST['content'];
 
-        $sth = $pdo->prepare("UPDATE `logs` SET `bericht` = :content; WHERE logs_ID = :id;");
-        $sth->bindValue(':content', $content, PDO::PARAM_STR);
+        $sth = $pdo->prepare("UPDATE `logs` SET `bericht` = :content WHERE logs_ID = :id;");
         $sth->bindValue(':id', $id, PDO::PARAM_STR);
+        $sth->bindValue(':content', $content, PDO::PARAM_STR);
         $sth->execute();
         echo true;
 
