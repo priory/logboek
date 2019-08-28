@@ -26,9 +26,9 @@ require $root.'app/pdo.php';
 <div class="row" id = "log-${i.id}">
     <div class="input-field col s6">            
         <strong>${i.date}: </strong>
-        <textarea class="content">${i.content}</textarea>
-        <button onclick="logDelete(${i.id}, removeLog)">DELETE</button>
-        <button onclick="logDelete(${i.id}, removeLog)">UPDATE</button>
+        <textarea class="content materialize-textarea ">${i.content}</textarea>
+        <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${i.id}, removeLog)">DELETE</button>
+        <button class="btn waves-effect waves-light red darken-1" onclick="logDelete(${i.id}, removeLog)">UPDATE</button>
     </div>
 </div>
 `);
@@ -38,9 +38,8 @@ require $root.'app/pdo.php';
 </script>
 </head>
 <body>
-
     <?php
-
+    require_once('../resources/layouts/nav.php');
         $sqlleerlingen = "
         SELECT leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
         FROM `leerlingen`
@@ -84,8 +83,6 @@ require $root.'app/pdo.php';
         };
         echo "</div></div>";
     ?>
-    <button><a href="kaart.php">Kaart</a></button>
-    <button><a href="javascript:history.back()">Terug</a></button>
     
 </body>
 </html>
