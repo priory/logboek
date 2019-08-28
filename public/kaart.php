@@ -122,6 +122,12 @@
                     width: 100px; height: 100px; top: 5px; right: 950px;
                 }
         </style>
+
+        <script>
+            function link( id ) {
+                window.location = 'groep.php?groep=' + id;
+            }
+        </script>
 	</head>
 	<body>
         <div id="background">
@@ -153,55 +159,55 @@
                 <h4>2.05</h4>
                 <h4>Werkplekken</h4>
             </div>
-            <div id="cubicle-1" class="cubicle">
+            <div id="cubicle-1" class="cubicle" onclick="link(1);">
                 <h3>1</h3>
             </div>
-            <div id="cubicle-2" class="cubicle">
+            <div id="cubicle-2" class="cubicle"  onclick="link(2);">
                 <h3>2</h3>
             </div>
-            <div id="cubicle-3" class="cubicle">
+            <div id="cubicle-3" class="cubicle"  onclick="link(3);">
                 <h3>3</h3>
             </div>
-            <div id="cubicle-4" class="cubicle">
+            <div id="cubicle-4" class="cubicle"  onclick="link(4);">
                 <h3>4</h3>
             </div>
-            <div id="cubicle-5" class="cubicle">
+            <div id="cubicle-5" class="cubicle"  onclick="link(5);">
                 <h3>5</h3>
             </div>
-            <div id="cubicle-6" class="cubicle">
+            <div id="cubicle-6" class="cubicle"  onclick="link(6);">
                 <h3>6</h3>
             </div>
-            <div id="cubicle-7" class="cubicle">
+            <div id="cubicle-7" class="cubicle"  onclick="link(7);">
                 <h3>7</h3>
             </div>
-            <div id="cubicle-8" class="cubicle">
+            <div id="cubicle-8" class="cubicle"  onclick="link(8);">
                 <h3>8</h3>
             </div>
-            <div id="cubicle-9" class="cubicle">
+            <div id="cubicle-9" class="cubicle"  onclick="link(9);">
                 <h3>9</h3>
             </div>
-            <div id="cubicle-10" class="cubicle">
+            <div id="cubicle-10" class="cubicle"  onclick="link(10);">
                 <h3>10</h3>
             </div>
-            <div id="cubicle-11" class="cubicle">
+            <div id="cubicle-11" class="cubicle"  onclick="link(11);">
                 <h3>11</h3>
             </div>
-            <div id="cubicle-12" class="cubicle">
+            <div id="cubicle-12" class="cubicle"  onclick="link(12);">
                 <h3>12</h3>
             </div>
-            <div id="cubicle-13" class="cubicle">
+            <div id="cubicle-13" class="cubicle"  onclick="link(13);">
                 <h3>13</h3>
             </div>
-            <div id="cubicle-14" class="cubicle">
+            <div id="cubicle-14" class="cubicle"  onclick="link(14);">
                 <h3>14</h3>
             </div>
-            <div id="cubicle-15" class="cubicle">
+            <div id="cubicle-15" class="cubicle"  onclick="link(15);">
                 <h3>15</h3>
             </div>
-            <div id="cubicle-16" class="cubicle">
+            <div id="cubicle-16" class="cubicle"  onclick="link(16);">
                 <h3>16</h3>
             </div>
-            <div id="cubicle-17" class="cubicle">
+            <div id="cubicle-17" class="cubicle"  onclick="link(17);">
                 <h3>17</h3>
             </div>
         </div>
