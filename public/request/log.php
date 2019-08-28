@@ -8,16 +8,20 @@ switch ($_POST['method']) {
     case 'GET':
         if(!isset($_POST['groep'])) {
             $leerling = $_POST['leerling'];
-            $query = "SELECT * FROM `logs` WHERE voor_leerling = $leerling";
+            $sth = $pdo->prepare("SELECT * FROM `logs` WHERE voor_leerling = :leerling;");
+            $sth->bindValue(':leerling', $leerling, PDO::PARAM_STR);
         } else {
             $groep = $_POST['groep'];
-            $query = "SELECT * FROM `logs` WHERE voor_groep = $groep";
+            $sth = $pdo->prepare("SELECT * FROM `logs` WHERE voor_groep = :groep;");
+            $sth->bindValue(':groep', $groep, PDO::PARAM_STR);
         }
+
         
-        $result = $pdo->query($query);
+        $sth->execute();
+        
 
         $logs = [];
-        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             
             $logs[] = ['id' => $row['logs_ID'],'content' => $row['bericht'], 'date' => $row['datum']];
             

@@ -26,10 +26,8 @@ require $root.'app/pdo.php';
         alert('Succesvol geüpdatet')
     }
 
-    function renderLogs(data) {
-        for (let i of data) {
-
-            $("table").append(`
+    function makeLog(data) {
+        $("table").append(`
                 
             <div class="row" id = "log-${i.id}">
                 <div class="input-field col s10">            
@@ -39,9 +37,14 @@ require $root.'app/pdo.php';
                     <button class="btn waves-effect waves-light red darken-1" onclick="logUpdate(${i.id}, $('#log-${i.id} textarea').val(), updateLog)">UPDATE</button>
                 </div>
             </div>
-            `);
+        `);
+        M.textareaAutoResize($('#log-'+$i.id+'textarea'));
+    }
+
+    function renderLogs(data) {
+        for (let i of data) {
+            makeLog(data);
         }
-        M.textareaAutoResize($('textarea'));
     }
 
     
