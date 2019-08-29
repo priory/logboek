@@ -3,6 +3,7 @@
 $root = __DIR__ . '\..\\..\\';
 
 require_once $root . 'app\\pdo.php';
+require_once $root . 'app\\authorize.php';
 
 switch ($_POST['method']) {
     case 'GET':
@@ -28,10 +29,6 @@ switch ($_POST['method']) {
             
         }
         echo json_encode($logs);
-
-        
-        
-        
 
         break;
     case 'STORE':
@@ -63,12 +60,21 @@ switch ($_POST['method']) {
         }
         break;
 		
-	case 'INSERT':
-        $content = $_POST['content'];
+    case 'INSERT':
+        $content = $_POST['content'] ?? null;
+        $leerling = $_POST['leerling'] ?? null;
+        $groep = $_POST['groep'] ?? null;
 
-        $query = "INSERT INTO `logs` (`bericht`) VALUES ('$content')";
-        $result = $pdo->query($query);
-        echo true;
+        $sth = $pdo->prepare("INSERT INTO `logs`(`bericht`, `datum`, `user_id`, `voor_leerling`, `voor_groep`) VALUES (:content, NOW(), :session_user, :leerling, :groep);");  
+        $sth->bindValue(':session_user', (int) $_SESSION['user'], PDO::PARAM_INT);
+        $sth->bindValue(':content', $content, PDO::PARAM_STR);
+        $sth->bindValue(':leerling', (int) $leerling ?: null, PDO::PARAM_INT);
+        $sth->bindValue(':groep', (int) $groep ?: null, PDO::PARAM_INT);
+        $sth->execute();
+
+        $log_id = $pdo->query("SELECT MAX(`logs_ID`) as 'logs_ID' FROM `logs`;")->fetch(PDO::FETCH_ASSOC);
+
+        echo json_encode($result);
 		
 		break;
 }

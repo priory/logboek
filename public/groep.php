@@ -27,13 +27,17 @@ require $root.'app/pdo.php';
         alert('Succesvol geüpdatet')
     }
 	
-	function addLog(id) {
-        alert('Succesvol toegevoegd')
-    }
-    // Voorbeeld {id,date,content}
-    function makeLog(data) {
+	function addLog(data) {
         console.log(data);
-        $("#logboek").append(`
+    }
+
+    /**
+     * Renders a new log
+     *
+     * @param {object} data {id, content, date}
+     */
+    function makeLog(data) {
+        $("#logboek").prepend(`
                 
         <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
@@ -115,7 +119,7 @@ require $root.'app/pdo.php';
         echo "</table></div></div>";
     ?>
 	<textarea id="log-new">test</textarea>
-	<button onclick="logAdd($('#log-new').val(), addLog)">toevoegen</button>
+	<button onclick="logAdd($('#log-new').val(), addLog, null, <?= $_GET['groep'] ?>)">toevoegen</button>
     <div id="logboek"></div>
 </body>
 </html>
