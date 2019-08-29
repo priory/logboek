@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 28 aug 2019 om 12:52
+-- Gegenereerd op: 29 aug 2019 om 11:10
 -- Serverversie: 10.1.37-MariaDB
 -- PHP-versie: 7.3.1
 
@@ -119,7 +119,7 @@ INSERT INTO `level` (`Level`) VALUES
 CREATE TABLE `logs` (
   `logs_ID` int(11) NOT NULL,
   `bericht` text COLLATE utf8_unicode_ci NOT NULL,
-  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) DEFAULT NULL,
   `voor_leerling` int(11) DEFAULT NULL,
   `voor_groep` int(11) DEFAULT NULL
@@ -130,7 +130,7 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`logs_ID`, `bericht`, `datum`, `user_id`, `voor_leerling`, `voor_groep`) VALUES
-(13, 'Joel Joel joel !', '2019-08-28 09:00:22', NULL, 5, NULL);
+(13, 'Joel you can do it', '2019-08-28 12:57:42', NULL, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `logs_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
