@@ -22,9 +22,11 @@ require $root.'app/pdo.php';
         alert('Succesvol geüpdatet')
     }
 	
-	function addLog(id) {
-        alert('Succesvol toegevoegd')
+	function addLog(data) {
+        makeLog(data);
+        $('#log-new').val('');
     }
+
     // Voorbeeld {id,date,content}
     function makeLog(data) {
         $("#logboek").append(`
@@ -105,6 +107,8 @@ require $root.'app/pdo.php';
         echo "</div></div>";
         
     ?>
+    <textarea id="log-new" onkeydown="console.log(1)"></textarea>
+	<button class="btn grey" onclick="logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null)">toevoegen</button>
     <div id="logboek"></div>
 </body>
 </html>

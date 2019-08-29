@@ -23,10 +23,8 @@
         $.ajax({url:'request/log.php', method:'POST', data: { method: 'UPDATE', id, content } }).then(r => callback(r));
     }
 	function logAdd(content, callback, leerling = null, groep = null) {
-        $.ajax({url:'request/log.php', method:'POST', data: { method: 'INSERT', content, leerling, groep } }).then(r => callback(r));
+        $.ajax({url:'request/log.php', method:'POST', data: { method: 'INSERT', content, leerling, groep } }).then(r => callback(JSON.parse(r)));
     }
-
-
 
     $(function () {
         

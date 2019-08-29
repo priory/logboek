@@ -72,9 +72,15 @@ switch ($_POST['method']) {
         $sth->bindValue(':groep', (int) $groep ?: null, PDO::PARAM_INT);
         $sth->execute();
 
-        $log_id = $pdo->query("SELECT MAX(`logs_ID`) as 'logs_ID' FROM `logs`;")->fetch(PDO::FETCH_ASSOC);
+        $log_id = $pdo->query("SELECT MAX(`logs_ID`) as 'logs_ID' FROM `logs`;")->fetch(PDO::FETCH_ASSOC)['logs_ID'];
 
-        echo json_encode($result);
+        $sth = $pdo->prepare("SELECT `logs_ID` as 'id', `bericht` as 'content', `datum` as 'date' FROM `logs` WHERE `logs_ID` = :id");
+        $sth->bindValue(':id', (int) $log_id, PDO::PARAM_INT);
+        $sth->execute();
+
+        $log = $sth->fetch(PDO::FETCH_ASSOC);
+
+        echo json_encode($log);
 		
 		break;
 }

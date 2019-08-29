@@ -17,6 +17,10 @@ require $root.'app/pdo.php';
 <script>
     $(function () {
         getGroep(<?= $_GET['groep']?>, renderLogs);
+
+        $('#log-new').change(function () {
+            console.log(1);
+        });
     });
 
     function removeLog(id) {
@@ -28,7 +32,8 @@ require $root.'app/pdo.php';
     }
 	
 	function addLog(data) {
-        console.log(data);
+        makeLog(data);
+        $('#log-new').val('');
     }
 
     /**
@@ -118,8 +123,8 @@ require $root.'app/pdo.php';
         };
         echo "</table></div></div>";
     ?>
-	<textarea id="log-new">test</textarea>
-	<button onclick="logAdd($('#log-new').val(), addLog, null, <?= $_GET['groep'] ?>)">toevoegen</button>
+	<textarea id="log-new" onkeydown="console.log(1)"></textarea>
+	<button class="btn grey" onclick="logAdd($('#log-new').val(), addLog, null, <?= $_GET['groep'] ?>)">toevoegen</button>
     <div id="logboek"></div>
 </body>
 </html>
