@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script>
+    var weekdays = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
     function getLeerling(leerling, callback){
         $.ajax({url:'request/log.php', method:'POST', data: { method: 'GET', leerling } }).then(r => callback(JSON.parse(r)));
     }
