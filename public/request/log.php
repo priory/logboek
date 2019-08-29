@@ -51,15 +51,17 @@ switch ($_POST['method']) {
         break;
     case 'DELETE':
         $id = $_POST['id'];
+
+        echo $id; die;
         
         $sth = $pdo->prepare("DELETE FROM `logs` WHERE logs_ID = :id");
         $sth->bindValue(':id', $id, PDO::PARAM_STR);
-        $sth->execute();
-        if($result) {
+
+        if($sth->execute()) {
             echo $id;
         }
+
         break;
-		
     case 'INSERT':
         $content = $_POST['content'] ?? null;
         $leerling = $_POST['leerling'] ?? null;
