@@ -1,6 +1,7 @@
 <?php 
 $root = __DIR__ . '\..\\';
-require $root.'app/pdo.php';
+require_once $root .'app\\pdo.php';
+require_once $root . 'app\\authorize.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

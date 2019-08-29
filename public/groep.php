@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $root = __DIR__ . '\..\\';
-require $root.'app/pdo.php';
-
+require_once $root .'app\\pdo.php';
+require_once $root . 'app\\authorize.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
