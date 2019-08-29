@@ -52,8 +52,6 @@ switch ($_POST['method']) {
     case 'DELETE':
         $id = $_POST['id'];
 
-        echo $id; die;
-        
         $sth = $pdo->prepare("DELETE FROM `logs` WHERE logs_ID = :id");
         $sth->bindValue(':id', $id, PDO::PARAM_STR);
 
