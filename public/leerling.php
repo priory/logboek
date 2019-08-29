@@ -104,8 +104,6 @@ require $root.'app/pdo.php';
                         <td>" . $row["Cohort"] . "</td>
                     </tr>";
         }
-        echo "</table>";
-        
 
         echo "<div class='row'><div class='col s6'>";
         // Table aanmaken
@@ -114,7 +112,7 @@ require $root.'app/pdo.php';
                 echo $table_done;
             }
         };
-        echo "</div></div>";
+        echo "</table></div></div>";
         
     ?>
     <textarea id="log-new" onkeydown="console.log(1)"></textarea>
