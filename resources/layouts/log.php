@@ -22,6 +22,7 @@
 	function addLog(data) {
         makeLog(data);
         $('#log-new').val('');
+        $( '#log-new-button' ).addClass( 'disabled' );
     }
 
     /**
