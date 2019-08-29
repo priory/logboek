@@ -12,6 +12,16 @@ require $root.'app/pdo.php';
 <script>
     $(function () {
         getLeerling(<?= $_GET['leerling']?>, renderLogs);
+
+        $(' #log-new' ).on( 'input', function () {
+            $e = $( this );
+
+            if ( $( this ).val().length == 0 ) {
+                $( '#log-new-button' ).addClass( 'disabled' );
+            } else {
+                $( '#log-new-button' ).removeClass( 'disabled' );
+            }
+        } );
     });
 
     function removeLog(id) {
@@ -29,7 +39,7 @@ require $root.'app/pdo.php';
 
     // Voorbeeld {id,date,content}
     function makeLog(data) {
-        $("#logboek").append(`
+        $("#logboek").prepend(`
                 
             <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
@@ -108,7 +118,9 @@ require $root.'app/pdo.php';
         
     ?>
     <textarea id="log-new" onkeydown="console.log(1)"></textarea>
-	<button class="btn grey" onclick="logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null)">toevoegen</button>
+	<button id="log-new-button" class="btn grey disabled" onclick="
+        $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null);
+    ">toevoegen</button>
     <div id="logboek"></div>
 </body>
 </html>

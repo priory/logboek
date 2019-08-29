@@ -15,13 +15,19 @@ require $root.'app/pdo.php';
     require_once $root . 'resources\\layouts\\head.php';
 ?>
 <script>
-    $(function () {
-        getGroep(<?= $_GET['groep']?>, renderLogs);
+    $( function () {
+        getGroep( <?= $_GET['groep']?>, renderLogs );
 
-        $('#log-new').change(function () {
-            console.log(1);
-        });
-    });
+        $(' #log-new' ).on( 'input', function () {
+            $e = $( this );
+
+            if ( $( this ).val().length == 0 ) {
+                $( '#log-new-button' ).addClass( 'disabled' );
+            } else {
+                $( '#log-new-button' ).removeClass( 'disabled' );
+            }
+        } );
+    } );
 
     function removeLog(id) {
         $('#log-'+id).remove();
@@ -123,8 +129,10 @@ require $root.'app/pdo.php';
         };
         echo "</table></div></div>";
     ?>
-	<textarea id="log-new" onkeydown="console.log(1)"></textarea>
-	<button class="btn grey" onclick="logAdd($('#log-new').val(), addLog, null, <?= $_GET['groep'] ?>)">toevoegen</button>
+	<textarea id="log-new"></textarea>
+	<button id="log-new-button" class="btn grey disabled" onclick="
+        $( this ).hasClass( 'disabled' ) ? null : logAdd( $( '#log-new' ).val(), addLog, null, <?= $_GET['groep'] ?> );
+    ">toevoegen</button>
     <div id="logboek"></div>
 </body>
 </html>
