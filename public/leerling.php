@@ -21,11 +21,12 @@ require_once $root . 'app\\authorize.php';
         //require '../app/connectie.php';
 
     require_once('../resources/layouts/nav.php');
-        $sqlleerlingen = "
+    $sth = $pdo->prepare("
         SELECT leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
         FROM `leerlingen`
         INNER JOIN `cohort` ON leerlingen.Cohort=cohort.Cohort_ID
-        WHERE leerlingen.leerling_ID = $_GET[leerling]";
+        WHERE leerlingen.leerling_ID = :leerling");
+        $sth->bindValue(':leerling', $_GET['leerling'], PDO::PARAM_STR);
 
         $table[] = "
             <table class='striped'>
@@ -40,9 +41,9 @@ require_once $root . 'app\\authorize.php';
                     </tr>
                 </thead>";
 
-        $result = $pdo->query($sqlleerlingen);
+        $sth->execute();
 
-        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $table[] = "<tr>
                         <td>" . $row["voornaam"] . "</td>
                         <td>" . $row["tussenvoegsel"] . "</td>

@@ -25,11 +25,12 @@ require_once $root . 'app\\authorize.php';
 
     require_once('../resources/layouts/nav.php');
 
-        $sqlgroepen = "
+    $sth = $pdo->prepare("
         SELECT leerlingen.leerling_ID, leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
         FROM `leerlingen`
         INNER JOIN `cohort` ON leerlingen.Cohort=cohort.Cohort_ID
-        WHERE leerlingen.Groep_id = $_GET[groep]";
+        WHERE leerlingen.Groep_id = :groep");
+    $sth->bindValue(':groep', $_GET['groep'], PDO::PARAM_STR);
 
         $table[] = "
             <h2>Groep ".$_GET['groep']."</h2>
@@ -46,8 +47,8 @@ require_once $root . 'app\\authorize.php';
                     </tr>
                 </thead>";
 
-        $result = $pdo->query($sqlgroepen);
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        $sth->execute();
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $table[] = "<tr>
                         <td>" . $row["voornaam"] . "</td>
                         <td>" . $row["tussenvoegsel"] . "</td>
