@@ -18,8 +18,6 @@ require_once $root . 'app\\authorize.php';
 </head>
 <body>
     <?php
-        //require '../app/connectie.php';
-
     require_once('../resources/layouts/nav.php');
     $sth = $pdo->prepare("
         SELECT `students`.`id`, `students`.`name`, `students`.`surname`, `students`.`group_id`, `cohorts`.`name` as `cohort`, `levels`.`level`
@@ -65,7 +63,7 @@ require_once $root . 'app\\authorize.php';
         <div class="col s6">
         <textarea id="log-new" class="materialize-textarea" onkeydown="console.log(1)"></textarea>
             <button id="log-new-button" class="btn grey disabled" onclick="
-                $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null);
+                $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, <?= $_GET['groep'] ?>); //logAdd function -> head.php
             ">toevoegen</button>
         </div>
     </div>

@@ -32,14 +32,12 @@
      */
     function makeLog(data) {
         let date = new Date(data.date);
-
         $("#logboek").prepend(`
                 
         <div class="row" id = "log-${data.id}">
                 <div class="input-field col s10">            
-                    <span style="font-weight: bold;">${data.date} (${weekdays[date.getDay()]}): </span>
+                    <span style="font-weight: bold;">${date.toLocaleString()} (${weekdays[date.getDay()]}): </span>
                     <textarea class="content materialize-textarea">${data.content}</textarea>
-                    
                 </div>
                 <div class="input-field col s2">
                     <a class='dropdown-trigger btn btn-floating btn-large waves-effect waves-light grey' href='#' data-target='dropdown-log-${data.id}'><i class="material-icons">more_horiz</i></a>

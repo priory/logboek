@@ -12,17 +12,23 @@ require_once $root . 'app\\authorize.php';
 <?php 
     require_once $root . 'resources\\layouts\\head.php';
     require_once $root . 'resources\\layouts\\log.php';
+
+    $query = $pdo->prepare("SELECT `cubicles`.`group_id` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek");
+    $query->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
+    $query->execute();
+    $group_id = $query->fetch(PDO::FETCH_ASSOC);
+    $group_id = $group_id['group_id'];
 ?>
 <script>
     $( function () {
-        getGroep( <?= $_GET['werkplek']?>, renderLogs );
+        var group_id = '<?php echo $group_id; ?>';
+        console.log('group id = ' +group_id);
+        getGroep(group_id, renderLogs );
     } );
 </script>
 </head>
 <body>
-    
     <?php
-    
     require_once('../resources/layouts/nav.php');
 
     $sth = $pdo->prepare("
@@ -55,11 +61,10 @@ require_once $root . 'app\\authorize.php';
                             <td>" . $row["surname"] . "</td>
                             <td>" . $row["cohort"] . "</td>
                             <td>" . $row["level"] . "</td>
-                            <td><a href='leerling.php?leerling=". $row['student_id']. "'>log</a></td>
+                            <td><a href='leerling.php?leerling=". $row['student_id']. "&groep=". $group_id ."'>log</a></td>
                         </tr>";
         }
         
-
         echo "<div class='row'><div class='col s6'>";
         // Table aanmaken
         if (isset($table)) {
@@ -74,7 +79,7 @@ require_once $root . 'app\\authorize.php';
         <div class="col s6">
             <textarea id="log-new" class="materialize-textarea" onkeydown="console.log(1)"></textarea>
             <button id="log-new-button" class="btn grey disabled" onclick="
-                $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null);
+                $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, null, <?php echo $group_id; ?>); //logAdd function -> head.php
             ">toevoegen</button>
         </div>
     </div>
