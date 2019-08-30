@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 30 aug 2019 om 20:08
+-- Gegenereerd op: 30 aug 2019 om 23:58
 -- Serverversie: 10.3.16-MariaDB
 -- PHP-versie: 7.3.7
 
@@ -158,9 +158,18 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `logs`
+--
+
+INSERT INTO `logs` (`id`, `content`, `date`, `user_id`, `student_id`, `group_id`) VALUES
+(9, 'Dit is Joël', '2019-08-30 23:54:09', 1, 1, 1),
+(10, 'Test voor werkplek 17', '2019-08-30 23:54:58', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +306,8 @@ ALTER TABLE `levels`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `logs_group_id_foreign` (`group_id`);
+  ADD KEY `logs_group_id_foreign` (`group_id`),
+  ADD KEY `logs_student_id_foreign` (`student_id`);
 
 --
 -- Indexen voor tabel `periods`
@@ -352,13 +362,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT voor een tabel `levels`
 --
 ALTER TABLE `levels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT voor een tabel `periods`
@@ -413,7 +423,8 @@ ALTER TABLE `group_student`
 -- Beperkingen voor tabel `logs`
 --
 ALTER TABLE `logs`
-  ADD CONSTRAINT `logs_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `logs_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `logs_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`);
 
 --
 -- Beperkingen voor tabel `students`
