@@ -160,7 +160,7 @@
                 <h4>2.05</h4>
                 <h4>Werkplekken</h4>
             </div>
-            <div id="cubicle-1" class="cubicle" onclick="link(1);">
+            <div id="cubicle-1" class="cubicle" onclick="link(17);">
                 <h3>1</h3>
             </div>
             <div id="cubicle-2" class="cubicle"  onclick="link(2);">
@@ -208,7 +208,7 @@
             <div id="cubicle-16" class="cubicle"  onclick="link(16);">
                 <h3>16</h3>
             </div>
-            <div id="cubicle-17" class="cubicle"  onclick="link(17);">
+            <div id="cubicle-17" class="cubicle"  onclick="link(1);">
                 <h3>17</h3>
             </div>
         </div>
