@@ -26,10 +26,11 @@ require_once $root . 'app\\authorize.php';
     require_once('../resources/layouts/nav.php');
 
     $sth = $pdo->prepare("
-        SELECT leerlingen.leerling_ID, leerlingen.voornaam, leerlingen.tussenvoegsel, leerlingen.achternaam, leerlingen.Groep_id, leerlingen.Level, cohort.Cohort
-        FROM `leerlingen`
-        INNER JOIN `cohort` ON leerlingen.Cohort=cohort.Cohort_ID
-        WHERE leerlingen.Groep_id = :groep");
+    SELECT students.id, students.name, students.surname, students.group_id, cohorts.name as cohort, levels.level
+    FROM students
+    INNER JOIN cohorts ON students.cohort_id=cohorts.id
+    INNER JOIN levels ON students.level_id=levels.id
+    WHERE students.group_id = :groep");
     $sth->bindValue(':groep', $_GET['groep'], PDO::PARAM_STR);
 
         $table[] = "
@@ -38,25 +39,22 @@ require_once $root . 'app\\authorize.php';
                 <thead>
                     <tr>
                         <th class=' '>Voornaam</th>
-                        <th class=' '>Tussenvoegsel</th>
                         <th class=' '>Achternaam</th>
-                        <th class=' '>Groep</th>
-                        <th class=' '>Level</th>
                         <th class=' '>Cohort</th>
+                        <th class=' '>Level</th>
                         <th class=' '>LOG</th>
                     </tr>
                 </thead>";
 
         $sth->execute();
+
         while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $table[] = "<tr>
-                        <td>" . $row["voornaam"] . "</td>
-                        <td>" . $row["tussenvoegsel"] . "</td>
-                        <td>" . $row["achternaam"] . "</td>
-                        <td>" . $row["Groep_id"] . "</td>
-                        <td>" . $row["Level"] . "</td>
-                        <td>" . $row["Cohort"] . "</td>
-                        <td><a href='leerling.php?leerling=". $row['leerling_ID']. "'>log</a></td>
+                        <td>" . $row["name"] . "</td>
+                        <td>" . $row["surname"] . "</td>
+                        <td>" . $row["cohort"] . "</td>
+                        <td>" . $row["level"] . "</td>
+                        <td><a href='leerling.php?leerling=". $row['id']. "'>log</a></td>
                     </tr>";
         }
         
