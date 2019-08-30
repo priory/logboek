@@ -26,7 +26,7 @@ require_once $root . 'app\\authorize.php';
     require_once('../resources/layouts/nav.php');
 
     $sth = $pdo->prepare("
-    SELECT students.id, students.name, students.surname, students.group_id, cohorts.name as cohort, levels.level
+    SELECT students.id, students.name, students.surname, cohorts.name as cohort, levels.level
     FROM students
     INNER JOIN cohorts ON students.cohort_id=cohorts.id
     INNER JOIN levels ON students.level_id=levels.id
@@ -50,12 +50,12 @@ require_once $root . 'app\\authorize.php';
 
         while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $table[] = "<tr>
-                        <td>" . $row["name"] . "</td>
-                        <td>" . $row["surname"] . "</td>
-                        <td>" . $row["cohort"] . "</td>
-                        <td>" . $row["level"] . "</td>
-                        <td><a href='leerling.php?leerling=". $row['id']. "'>log</a></td>
-                    </tr>";
+                            <td>" . $row["name"] . "</td>
+                            <td>" . $row["surname"] . "</td>
+                            <td>" . $row["cohort"] . "</td>
+                            <td>" . $row["level"] . "</td>
+                            <td><a href='leerling.php?leerling=". $row['id']. "'>log</a></td>
+                        </tr>";
         }
         
 
