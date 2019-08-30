@@ -22,11 +22,11 @@ require_once $root . 'app\\authorize.php';
 
     require_once('../resources/layouts/nav.php');
     $sth = $pdo->prepare("
-        SELECT students.id, students.name, students.surname, students.group_id, cohorts.name as cohort, levels.level
-        FROM students
-        INNER JOIN cohorts ON students.cohort_id=cohorts.id
-        INNER JOIN levels ON students.level_id=levels.id
-        WHERE students.id = :leerling");
+        SELECT `students`.`id`, `students`.`name`, `students`.`surname`, `students`.`group_id`, `cohorts`.`name` as `cohort`, `levels`.`level`
+        FROM `students`
+        INNER JOIN `cohorts` ON `students`.`cohort_id`=`cohorts`.`id`
+        INNER JOIN `levels` ON `students`.`level_id`=`levels`.`id`
+        WHERE `students`.`id` = :leerling");
         $sth->bindValue(':leerling', $_GET['leerling'], PDO::PARAM_STR);
 
         $table[] = "

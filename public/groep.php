@@ -26,12 +26,12 @@ require_once $root . 'app\\authorize.php';
     require_once('../resources/layouts/nav.php');
 
     $sth = $pdo->prepare("
-    SELECT students.id as student_id, groups.id as group_id, students.name, students.surname, cohorts.name as cohort, levels.level
-    FROM students
-    INNER JOIN cohorts ON students.cohort_id=cohorts.id
-    INNER JOIN levels ON students.level_id=levels.id
-    INNER JOIN groups ON students.group_id=groups.id
-    WHERE groups.id = (SELECT cubicles.group_id as werkplek FROM `cubicles` WHERE cubicles.number = :werkplek)");
+    SELECT `students`.`id` as `student_id`, `groups`.`id` as `group_id`, `students`.`name`, `students`.`surname`, `cohorts`.`name` as `cohort`, `levels`.`level`
+    FROM `students`
+    INNER JOIN `cohorts` ON `students`.`cohort_id`=`cohorts`.`id`
+    INNER JOIN `levels` ON `students`.`level_id`=`levels`.`id`
+    INNER JOIN `groups` ON `students`.`group_id`=`groups`.`id`
+    WHERE `groups`.`id` = (SELECT `cubicles`.`group_id` as `werkplek` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek)");
     $sth->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
 
         $table[] = "
