@@ -1,6 +1,6 @@
 <?php
 
-$dbname = 'logboek_appl';
+$dbname = 'logboek';
 $username = 'root';
 $passwd = '';
 
