@@ -64,10 +64,14 @@ require_once $root . 'app\\authorize.php';
         echo "</table></div></div>";
         
     ?>
-    <textarea id="log-new" onkeydown="console.log(1)"></textarea>
-	<button id="log-new-button" class="btn grey disabled" onclick="
-        $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null);
-    ">toevoegen</button>
+    <div class="row">
+        <div class="col s6">
+        <textarea id="log-new" class="materialize-textarea" onkeydown="console.log(1)"></textarea>
+            <button id="log-new-button" class="btn grey disabled" onclick="
+                $( this ).hasClass( 'disabled' ) ? null : logAdd($('#log-new').val(), addLog, <?= $_GET['leerling'] ?>, null);
+            ">toevoegen</button>
+        </div>
+    </div>
     <div id="logboek"></div>
 </body>
 </html>
