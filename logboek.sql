@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `logboek`
 --
-CREATE DATABASE IF NOT EXISTS `logboek` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `logboek` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_unicode_ci;
 USE `logboek`;
 
 -- --------------------------------------------------------
@@ -33,7 +33,7 @@ USE `logboek`;
 CREATE TABLE `cohorts` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `cohorts`
@@ -51,7 +51,7 @@ INSERT INTO `cohorts` (`id`, `name`) VALUES
 CREATE TABLE `cubicles` (
   `id` int(11) NOT NULL,
   `number` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `cubicles`
@@ -71,7 +71,7 @@ CREATE TABLE `groups` (
   `cubicle_id` int(11) NOT NULL,
   `year_id` int(11) NOT NULL,
   `period_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `groups`
@@ -89,7 +89,7 @@ INSERT INTO `groups` (`id`, `cubicle_id`, `year_id`, `period_id`) VALUES
 CREATE TABLE `group_student` (
   `group_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_student`
@@ -109,7 +109,7 @@ INSERT INTO `group_student` (`group_id`, `student_id`) VALUES
 CREATE TABLE `levels` (
   `id` int(11) NOT NULL,
   `level` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `levels`
@@ -130,7 +130,7 @@ CREATE TABLE `logs` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `student_id` int(11) DEFAULT NULL,
   `group_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ CREATE TABLE `logs` (
 CREATE TABLE `periods` (
   `id` int(11) NOT NULL,
   `period` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `periods`
@@ -162,7 +162,7 @@ CREATE TABLE `students` (
   `surname` varchar(255) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `cohort_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `students`
@@ -183,7 +183,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -201,7 +201,7 @@ INSERT INTO `users` (`id`, `user`, `password`) VALUES
 CREATE TABLE `years` (
   `id` int(11) NOT NULL,
   `year` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `years`
