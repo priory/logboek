@@ -22,7 +22,7 @@ if (count($result) == 0) {
 }
 
 // Incorrect password
-if ($result[0]['wachtwoord'] != $password) {
+if (! password_verify($password, $result[0]['wachtwoord'])) {
     $_SESSION['errors'] = ['Ongeldige wachtwoord'];
     header('Location: index.php'); die;
 }
