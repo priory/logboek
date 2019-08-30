@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2019 at 03:07 PM
+-- Generation Time: Aug 30, 2019 at 03:55 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.8
 
@@ -16,7 +16,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `logboek`
@@ -32,7 +32,7 @@ USE `logboek`;
 
 CREATE TABLE `cohorts` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -126,7 +126,7 @@ INSERT INTO `levels` (`id`, `level`) VALUES
 
 CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `student_id` int(11) DEFAULT NULL,
   `group_id` int(11) NOT NULL
@@ -158,20 +158,21 @@ INSERT INTO `periods` (`id`, `period`) VALUES
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `group_id` int(11) DEFAULT NULL,
-  `cohort_id` int(11) NOT NULL
+  `cohort_id` int(11) NOT NULL,
+  `level_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`) VALUES
-(1, 'Joël', 'Eeveren, van', 1, 1),
-(2, 'Vladik', 'Packo', 1, 1),
-(3, 'Thijmen', 'Avoort, van de', 1, 1);
+INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`, `level_id`) VALUES
+(1, 'Joël', 'Eeveren, van', 1, 1, 1),
+(2, 'Vladik', 'Packo', 1, 1, 1),
+(3, 'Thijmen', 'Avoort, van de', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -181,8 +182,8 @@ INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -267,7 +268,8 @@ ALTER TABLE `periods`
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
   ADD KEY `students_group_id_foreign` (`group_id`),
-  ADD KEY `studnets_cohort_id_foreign` (`cohort_id`);
+  ADD KEY `studnets_cohort_id_foreign` (`cohort_id`),
+  ADD KEY `students_level_id_foreign` (`level_id`);
 
 --
 -- Indexes for table `users`
@@ -368,8 +370,9 @@ ALTER TABLE `logs`
 -- Constraints for table `students`
 --
 ALTER TABLE `students`
+  ADD CONSTRAINT `students_cohort_id_foreign` FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `students_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `studnets_cohort_id_foreign` FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `students_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
