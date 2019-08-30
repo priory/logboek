@@ -15,26 +15,27 @@ require_once $root . 'app\\authorize.php';
 ?>
 <script>
     $( function () {
-        getGroep( <?= $_GET['groep']?>, renderLogs );
+        getGroep( <?= $_GET['werkplek']?>, renderLogs );
     } );
 </script>
 </head>
 <body>
     
     <?php
-
+    
     require_once('../resources/layouts/nav.php');
 
     $sth = $pdo->prepare("
-    SELECT students.id, students.name, students.surname, cohorts.name as cohort, levels.level
+    SELECT students.id as student_id, groups.id as group_id, students.name, students.surname, cohorts.name as cohort, levels.level
     FROM students
     INNER JOIN cohorts ON students.cohort_id=cohorts.id
     INNER JOIN levels ON students.level_id=levels.id
-    WHERE students.group_id = :groep");
-    $sth->bindValue(':groep', $_GET['groep'], PDO::PARAM_STR);
+    INNER JOIN groups ON students.group_id=groups.id
+    WHERE groups.id = (SELECT cubicles.group_id as werkplek FROM `cubicles` WHERE cubicles.number = :werkplek)");
+    $sth->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
 
         $table[] = "
-            <h2>Groep ".$_GET['groep']."</h2>
+            <h2>Werkplek ".$_GET['werkplek']."</h2>
             <table class='striped'>
                 <thead>
                     <tr>
@@ -54,7 +55,7 @@ require_once $root . 'app\\authorize.php';
                             <td>" . $row["surname"] . "</td>
                             <td>" . $row["cohort"] . "</td>
                             <td>" . $row["level"] . "</td>
-                            <td><a href='leerling.php?leerling=". $row['id']. "'>log</a></td>
+                            <td><a href='leerling.php?leerling=". $row['student_id']. "'>log</a></td>
                         </tr>";
         }
         
