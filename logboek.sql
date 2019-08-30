@@ -58,7 +58,7 @@ CREATE TABLE `cubicles` (
 --
 
 INSERT INTO `cubicles` (`id`, `number`) VALUES
-(1, 17);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -169,9 +169,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`) VALUES
-(1, 'Joël', 'Eeveren, van', NULL, 1),
-(2, 'Vladik', 'Packo', NULL, 1),
-(3, 'Thijmen', 'Avoort, van de', NULL, 1);
+(1, 'Joël', 'Eeveren, van', 1, 1),
+(2, 'Vladik', 'Packo', 1, 1),
+(3, 'Thijmen', 'Avoort, van de', 1, 1);
 
 -- --------------------------------------------------------
 
