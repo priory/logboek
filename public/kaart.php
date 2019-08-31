@@ -20,8 +20,8 @@
 
             #map-container {
                 width: 100%; 
-                height: 720px; 
-                overflow-x: scroll;
+                min-height: 720px;
+                overflow-x: auto;
             }
 
             #background {
