@@ -35,6 +35,7 @@ require_once $root . 'app\\authorize.php';
                         <th class=' '>Achternaam</th>
                         <th class=' '>Cohort</th>
                         <th class=' '>Level</th>
+                        <th class=\"center\">Aanpassen</th>
                     </tr>
                 </thead>";
 
@@ -46,6 +47,9 @@ require_once $root . 'app\\authorize.php';
                             <td>" . $row["surname"] . "</td>
                             <td>" . $row["cohort"] . "</td>
                             <td>" . $row["level"] . "</td>
+                            <td class=\"center\">
+                                <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='/leerling/edit?student={$_GET['leerling']}'><i class=\"material-icons\">edit</i></a>
+                            </td>
                         </tr>";
         }
 
