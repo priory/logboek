@@ -52,7 +52,7 @@ $sth = $pdo->prepare("
         `levels`.`level`, 
         `cohorts`.`name` as 'cohort'
     FROM `students` 
-    INNER JOIN `groups` 
+    LEFT JOIN `groups` 
         ON `groups`.`id` = `students`.`group_id`
     INNER JOIN `levels` 
         ON `levels`.`id` = `students`.`level_id`
@@ -75,7 +75,7 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
         <ul id='dropdown-student-{$row['id']}' class='dropdown-content'>
             <li><a class="waves-effect" href="/leerling.php?leerling={$row['id']}">Bekijken</a></li>
             <li><a class="waves-effect">Aanpassen</a></li>
-            <li><a class="red white-text waves-effect waves-light" href="/leerling/destroy.php?leerling={$row['id']}">Verwijderen</a></li>
+            <li><a class="red white-text waves-effect waves-light" href="/leerling/destroy.php?student={$row['id']}">Verwijderen</a></li>
         </ul>
     </td>
 </tr>

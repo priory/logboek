@@ -7,7 +7,9 @@ $name = $_POST['name'];
 $surname = $_POST['surname'];
 $cohort = $_POST['cohort'];
 $level = $_POST['level'];
-$group = $_POST['group'];
+$group = $_POST['group'] ?: null;
+
+error_log(print_r(gettype($group), true));
 
 $sth = $pdo->prepare("
     INSERT INTO `students` (`name`, `surname`, `cohort_id`, `level_id`, `group_id`) 
