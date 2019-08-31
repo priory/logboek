@@ -57,7 +57,7 @@ EOT;
             </div>
         </div>
         <div class="row">
-            <form name="form" action="./store.php" method="POST" class="col m8 s12 offset-m2">
+            <form name="form" action="/leerling/store.php" method="POST" class="col m8 s12 offset-m2">
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input id="name" name="name" type="text" placeholder="Jan">
