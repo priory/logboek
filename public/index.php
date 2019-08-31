@@ -12,13 +12,6 @@
 
         <script>
             $(function () {
-                <?php 
-                    if (isset($_SESSION['errors'])) {
-                        echo 'M.toast({html: \'' . $_SESSION['errors'][0] . '\'});';
-                        unset($_SESSION['errors']);
-                    }
-                ?>
-
                 $( 'input#user' ).keydown( function (e) {
                     if ( e.keyCode === 13) {
                         $( 'input#password' ).focus();

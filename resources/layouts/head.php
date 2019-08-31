@@ -28,6 +28,13 @@
     }
 
     $(function () {
+        <?php 
+            if (isset($_SESSION['errors'])) {
+                echo 'M.toast({html: \'' . $_SESSION['errors'][0] . '\'});';
+                unset($_SESSION['errors']);
+            }
+        ?>
+
         $('.sidenav').sidenav();
     });
 </script>
