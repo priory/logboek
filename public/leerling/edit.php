@@ -119,7 +119,7 @@ error_log(print_r($groups, true));
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <div class="btn waves-effect waves-light right col s12 m2" onclick="document.form.submit();">Wijzigen</div>
+                        <div class="btn waves-effect waves-light right col s12 m4 l2" onclick="document.form.submit();">Wijzigen</div>
                     </div>
                 </div>
             </form>
