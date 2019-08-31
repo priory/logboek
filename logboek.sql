@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 30 aug 2019 om 23:58
+-- Gegenereerd op: 31 aug 2019 om 14:28
 -- Serverversie: 10.3.16-MariaDB
 -- PHP-versie: 7.3.7
 
@@ -87,17 +87,19 @@ INSERT INTO `cubicles` (`id`, `number`, `group_id`) VALUES
 
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
-  `cubicle_id` int(11) NOT NULL,
+  `cubicle_id` int(11) DEFAULT NULL,
   `year_id` int(11) NOT NULL,
-  `period_id` int(11) NOT NULL
+  `trimester_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `groups`
 --
 
-INSERT INTO `groups` (`id`, `cubicle_id`, `year_id`, `period_id`) VALUES
-(1, 17, 1, 9);
+INSERT INTO `groups` (`id`, `cubicle_id`, `year_id`, `trimester_id`, `name`) VALUES
+(1, 17, 1, 3, 'Idk'),
+(13, NULL, 1, 1, 'Test');
 
 -- --------------------------------------------------------
 
@@ -169,7 +171,9 @@ CREATE TABLE `logs` (
 
 INSERT INTO `logs` (`id`, `content`, `date`, `user_id`, `student_id`, `group_id`) VALUES
 (9, 'Dit is Joël', '2019-08-30 23:54:09', 1, 1, 1),
-(10, 'Test voor werkplek 17', '2019-08-30 23:54:58', 1, NULL, 1);
+(10, 'Test voor werkplek 17', '2019-08-30 23:54:58', 1, NULL, 1),
+(11, 'Test', '2019-08-31 12:27:41', 1, NULL, 1),
+(12, 'Test', '2019-08-31 12:27:47', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -223,6 +227,27 @@ INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`, `level
 (1, 'Joël', 'Eeveren, van', 1, 1, 9),
 (2, 'Vladik', 'Packo', 1, 1, 9),
 (3, 'Thijmen', 'Avoort, van de', 1, 1, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `trimesters`
+--
+
+CREATE TABLE `trimesters` (
+  `id` int(11) NOT NULL,
+  `trimester` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `trimesters`
+--
+
+INSERT INTO `trimesters` (`id`, `trimester`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -284,9 +309,9 @@ ALTER TABLE `cubicles`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `groups_cubicle_id_year_id_period_id_unique` (`cubicle_id`,`year_id`,`period_id`) USING BTREE,
+  ADD UNIQUE KEY `groups_cubicle_id_year_id_period_id_unique` (`cubicle_id`,`year_id`,`trimester_id`) USING BTREE,
   ADD KEY `groups_year_id_foreign` (`year_id`),
-  ADD KEY `groups_period_id_foreign` (`period_id`);
+  ADD KEY `groups_period_id_foreign` (`trimester_id`);
 
 --
 -- Indexen voor tabel `group_student`
@@ -325,6 +350,12 @@ ALTER TABLE `students`
   ADD KEY `level_id` (`level_id`);
 
 --
+-- Indexen voor tabel `trimesters`
+--
+ALTER TABLE `trimesters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
@@ -356,7 +387,7 @@ ALTER TABLE `cubicles`
 -- AUTO_INCREMENT voor een tabel `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT voor een tabel `levels`
@@ -368,7 +399,7 @@ ALTER TABLE `levels`
 -- AUTO_INCREMENT voor een tabel `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT voor een tabel `periods`
@@ -381,6 +412,12 @@ ALTER TABLE `periods`
 --
 ALTER TABLE `students`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT voor een tabel `trimesters`
+--
+ALTER TABLE `trimesters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -409,7 +446,7 @@ ALTER TABLE `cubicles`
 --
 ALTER TABLE `groups`
   ADD CONSTRAINT `groups_cubicle_id_foreign` FOREIGN KEY (`cubicle_id`) REFERENCES `cubicles` (`id`),
-  ADD CONSTRAINT `groups_period_id_foreign` FOREIGN KEY (`period_id`) REFERENCES `periods` (`id`),
+  ADD CONSTRAINT `groups_trimest_id_foreign` FOREIGN KEY (`trimester_id`) REFERENCES `trimesters` (`id`),
   ADD CONSTRAINT `groups_year_id_foreign` FOREIGN KEY (`year_id`) REFERENCES `years` (`id`);
 
 --
