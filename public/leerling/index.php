@@ -73,9 +73,9 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     <td>
         <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='#' data-target='dropdown-student-{$row['id']}'><i class="material-icons">more_horiz</i></a>
         <ul id='dropdown-student-{$row['id']}' class='dropdown-content'>
-            <li><a class="waves-effect" href="leerling.php?leerling={$row['id']}">Bekijken</a></li>
+            <li><a class="waves-effect" href="/leerling.php?leerling={$row['id']}">Bekijken</a></li>
             <li><a class="waves-effect">Aanpassen</a></li>
-            <li><a class="red white-text waves-effect waves-light">Verwijderen</a></li>
+            <li><a class="red white-text waves-effect waves-light" href="/leerling/destroy.php?leerling={$row['id']}">Verwijderen</a></li>
         </ul>
     </td>
 </tr>
