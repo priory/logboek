@@ -23,7 +23,7 @@ require_once $root . 'app\\authorize.php';
         <div class="row">
             <div class="col m8 s12 offset-m2 center">
                 <h1>Groepen</h1>
-                <a class="btn-floating btn-large waves-effect waves-light right" href="groep/create.php"><i class="material-icons">add</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light right" href="/groep/create.php"><i class="material-icons">add</i></a>
             </div>
         </div>
         <div class="row">
@@ -70,7 +70,7 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
         <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='#' data-target='dropdown-group-{$row['group_id']}'><i class="material-icons">more_horiz</i></a>
         <ul id='dropdown-group-{$row['group_id']}' class='dropdown-content'>
             <li><a class="waves-effect" href="#">Bekijken</a></li>
-            <li><a class="waves-effect">Aanpassen</a></li>
+            <li><a class="waves-effect" href="/groep/edit.php?group_id={$row['group_id']}">Aanpassen</a></li>
             <li><a class="red white-text waves-effect waves-light" href="/groep/destroy.php?group_id={$row['group_id']}">Verwijderen</a></li>
         </ul>
     </td>

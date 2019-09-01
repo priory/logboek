@@ -2,7 +2,6 @@
 $root = __DIR__ . '\..\\..\\';
 require_once $root . 'app\\authorize.php';
 require_once $root . 'app\\pdo.php';
-// jaar periode werkplek
 $years = '';
 $trimesters = '';
 $cubicles = '';

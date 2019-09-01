@@ -82,7 +82,7 @@ error_log(print_r($groups, true));
         ?>
         <div class="row">
             <div class="col m8 s12 offset-m2 center">
-                <h1>Leerling Aanmaken</h1>
+                <h1>Leerling Aanpassen</h1>
             </div>
         </div>
         <div class="row">
