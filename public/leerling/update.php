@@ -6,7 +6,7 @@ require_once $root . 'app\\pdo.php';
 $student = $_GET['student'];
 $name = $_POST['name'];
 $surname = $_POST['surname'];
-$group = $_POST['group'];
+$group = $_POST['group'] ?: null;
 $level = $_POST['level'];
 $cohort = $_POST['cohort'];
 
