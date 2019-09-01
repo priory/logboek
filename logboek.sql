@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Gegenereerd op: 31 aug 2019 om 14:28
--- Serverversie: 10.3.16-MariaDB
--- PHP-versie: 7.3.7
+-- Host: localhost
+-- Generation Time: Sep 01, 2019 at 10:04 PM
+-- Server version: 8.0.17
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,16 +27,16 @@ USE `logboek`;
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `cohorts`
+-- Table structure for table `cohorts`
 --
 
 CREATE TABLE `cohorts` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `cohorts`
+-- Dumping data for table `cohorts`
 --
 
 INSERT INTO `cohorts` (`id`, `name`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `cohorts` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `cubicles`
+-- Table structure for table `cubicles`
 --
 
 CREATE TABLE `cubicles` (
@@ -57,7 +57,7 @@ CREATE TABLE `cubicles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `cubicles`
+-- Dumping data for table `cubicles`
 --
 
 INSERT INTO `cubicles` (`id`, `number`, `group_id`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `cubicles` (`id`, `number`, `group_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `groups`
+-- Table structure for table `groups`
 --
 
 CREATE TABLE `groups` (
@@ -90,21 +90,20 @@ CREATE TABLE `groups` (
   `cubicle_id` int(11) DEFAULT NULL,
   `year_id` int(11) NOT NULL,
   `trimester_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `groups`
+-- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`id`, `cubicle_id`, `year_id`, `trimester_id`, `name`) VALUES
-(1, 17, 1, 3, 'Idk'),
-(13, NULL, 1, 1, 'Test');
+(1, 17, 1, 3, 'JVT');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `group_student`
+-- Table structure for table `group_student`
 --
 
 CREATE TABLE `group_student` (
@@ -112,19 +111,10 @@ CREATE TABLE `group_student` (
   `student_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `group_student`
---
-
-INSERT INTO `group_student` (`group_id`, `student_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3);
-
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `levels`
+-- Table structure for table `levels`
 --
 
 CREATE TABLE `levels` (
@@ -133,7 +123,7 @@ CREATE TABLE `levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `levels`
+-- Dumping data for table `levels`
 --
 
 INSERT INTO `levels` (`id`, `level`) VALUES
@@ -153,32 +143,22 @@ INSERT INTO `levels` (`id`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `logs`
+-- Table structure for table `logs`
 --
 
 CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) DEFAULT NULL,
   `student_id` int(11) DEFAULT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Gegevens worden geëxporteerd voor tabel `logs`
---
-
-INSERT INTO `logs` (`id`, `content`, `date`, `user_id`, `student_id`, `group_id`) VALUES
-(9, 'Dit is Joël', '2019-08-30 23:54:09', 1, 1, 1),
-(10, 'Test voor werkplek 17', '2019-08-30 23:54:58', 1, NULL, 1),
-(11, 'Test', '2019-08-31 12:27:41', 1, NULL, 1),
-(12, 'Test', '2019-08-31 12:27:47', 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `periods`
+-- Table structure for table `periods`
 --
 
 CREATE TABLE `periods` (
@@ -187,7 +167,7 @@ CREATE TABLE `periods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `periods`
+-- Dumping data for table `periods`
 --
 
 INSERT INTO `periods` (`id`, `period`) VALUES
@@ -207,31 +187,31 @@ INSERT INTO `periods` (`id`, `period`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `surname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `cohort_id` int(11) NOT NULL,
   `level_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `students`
+-- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `name`, `surname`, `group_id`, `cohort_id`, `level_id`) VALUES
-(1, 'Joël', 'Eeveren, van', 1, 1, 9),
+(1, 'Joël', 'Eeveren, van', 1, 1, 10),
 (2, 'Vladik', 'Packo', 1, 1, 9),
 (3, 'Thijmen', 'Avoort, van de', 1, 1, 9);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `trimesters`
+-- Table structure for table `trimesters`
 --
 
 CREATE TABLE `trimesters` (
@@ -240,7 +220,7 @@ CREATE TABLE `trimesters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `trimesters`
+-- Dumping data for table `trimesters`
 --
 
 INSERT INTO `trimesters` (`id`, `trimester`) VALUES
@@ -252,17 +232,17 @@ INSERT INTO `trimesters` (`id`, `trimester`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `user` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user`, `password`) VALUES
@@ -271,7 +251,7 @@ INSERT INTO `users` (`id`, `user`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `years`
+-- Table structure for table `years`
 --
 
 CREATE TABLE `years` (
@@ -280,7 +260,7 @@ CREATE TABLE `years` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `years`
+-- Dumping data for table `years`
 --
 
 INSERT INTO `years` (`id`, `year`) VALUES
@@ -288,24 +268,24 @@ INSERT INTO `years` (`id`, `year`) VALUES
 (2, 2020);
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `cohorts`
+-- Indexes for table `cohorts`
 --
 ALTER TABLE `cohorts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `cubicles`
+-- Indexes for table `cubicles`
 --
 ALTER TABLE `cubicles`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cubicles_group_id_foreign` (`group_id`);
 
 --
--- Indexen voor tabel `groups`
+-- Indexes for table `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`),
@@ -314,20 +294,20 @@ ALTER TABLE `groups`
   ADD KEY `groups_period_id_foreign` (`trimester_id`);
 
 --
--- Indexen voor tabel `group_student`
+-- Indexes for table `group_student`
 --
 ALTER TABLE `group_student`
   ADD PRIMARY KEY (`group_id`,`student_id`),
   ADD KEY `group_student_student_id_foreign` (`student_id`);
 
 --
--- Indexen voor tabel `levels`
+-- Indexes for table `levels`
 --
 ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `logs`
+-- Indexes for table `logs`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`),
@@ -335,13 +315,13 @@ ALTER TABLE `logs`
   ADD KEY `logs_student_id_foreign` (`student_id`);
 
 --
--- Indexen voor tabel `periods`
+-- Indexes for table `periods`
 --
 ALTER TABLE `periods`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `students`
+-- Indexes for table `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
@@ -350,99 +330,99 @@ ALTER TABLE `students`
   ADD KEY `level_id` (`level_id`);
 
 --
--- Indexen voor tabel `trimesters`
+-- Indexes for table `trimesters`
 --
 ALTER TABLE `trimesters`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `years`
+-- Indexes for table `years`
 --
 ALTER TABLE `years`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `cohorts`
+-- AUTO_INCREMENT for table `cohorts`
 --
 ALTER TABLE `cohorts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT voor een tabel `cubicles`
+-- AUTO_INCREMENT for table `cubicles`
 --
 ALTER TABLE `cubicles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT voor een tabel `groups`
+-- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT voor een tabel `levels`
+-- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT voor een tabel `logs`
+-- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT voor een tabel `periods`
+-- AUTO_INCREMENT for table `periods`
 --
 ALTER TABLE `periods`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT voor een tabel `students`
+-- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT voor een tabel `trimesters`
+-- AUTO_INCREMENT for table `trimesters`
 --
 ALTER TABLE `trimesters`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT voor een tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT voor een tabel `years`
+-- AUTO_INCREMENT for table `years`
 --
 ALTER TABLE `years`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Beperkingen voor tabel `cubicles`
+-- Constraints for table `cubicles`
 --
 ALTER TABLE `cubicles`
-  ADD CONSTRAINT `cubicles_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`);
+  ADD CONSTRAINT `cubicles_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE SET NULL ON UPDATE RESTRICT;
 
 --
--- Beperkingen voor tabel `groups`
+-- Constraints for table `groups`
 --
 ALTER TABLE `groups`
   ADD CONSTRAINT `groups_cubicle_id_foreign` FOREIGN KEY (`cubicle_id`) REFERENCES `cubicles` (`id`),
@@ -450,25 +430,25 @@ ALTER TABLE `groups`
   ADD CONSTRAINT `groups_year_id_foreign` FOREIGN KEY (`year_id`) REFERENCES `years` (`id`);
 
 --
--- Beperkingen voor tabel `group_student`
+-- Constraints for table `group_student`
 --
 ALTER TABLE `group_student`
   ADD CONSTRAINT `group_student_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `group_student_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `logs`
+-- Constraints for table `logs`
 --
 ALTER TABLE `logs`
-  ADD CONSTRAINT `logs_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `logs_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`);
+  ADD CONSTRAINT `logs_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `logs_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Beperkingen voor tabel `students`
+-- Constraints for table `students`
 --
 ALTER TABLE `students`
-  ADD CONSTRAINT `students_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`),
+  ADD CONSTRAINT `students_group_id_foreign` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `students_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `studnets_cohort_id_foreign` FOREIGN KEY (`cohort_id`) REFERENCES `cohorts` (`id`);
 COMMIT;
 
