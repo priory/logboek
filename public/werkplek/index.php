@@ -1,18 +1,48 @@
 <?php
 $root = __DIR__ . '\..\\..\\';
 require_once $root . 'app\\authorize.php';
+require_once $root . 'app\\pdo.php';
+
+$groups = [];
+
+$sth = $pdo->prepare("
+    SELECT `id`, `name` FROM `groups`;
+");
+$sth->execute();
+
+$groups = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+$groups_select = '<option value=""></option>';
+
+foreach ($groups as $v) {
+    $groups_select .= "<option value=\"{$v['id']}\">{$v['name']}</option>";
+}
+
+error_log(print_r($groups_select, true));
 ?>
 <html>
 <head>
     <?php 
         require_once $root . 'resources\\layouts\\head.php';
-        require_once $root . 'app\\pdo.php';
     ?>
+    <style>
+        .select-dropdown.dropdown-trigger, .input-field {
+            margin: 0 !important;
+        }
+    </style>
     <script>
         $( function () {
-            $( '.dropdown-trigger' ).dropdown( {
-                constrainWidth: false,
+            $( '.cubicle' ).map( (i, v) => { 
+                let group = $( v ).data().group;
+                
+                $('option[value="' + ( group ) + '"]', v ).attr('selected', 'selected');
+
+                $( v ).change( ( e ) => {
+                    window.location = '/werkplek/assign.php?cubicle=' + ( $( e.target ).data().cubicle ) + '&group=' + ( $(e.target).val() );
+                } );
             } );
+
+            $( 'select' ).formSelect();
         } );
     </script>
     </head>
@@ -31,12 +61,8 @@ require_once $root . 'app\\authorize.php';
                 <table class="striped highlight responsive-table">
                     <thead>
                         <tr>
-                            <th>Voornaam</th>
-                            <th>Achternaam</th>
+                            <th>Werkplek</th>
                             <th>Groep</th>
-                            <th>Level</th>
-                            <th>Cohort</th>
-                            <th>Opties</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,20 +70,7 @@ require_once $root . 'app\\authorize.php';
 $table = '';
 
 $sth = $pdo->prepare("
-    SELECT 
-        `students`.`id`, 
-        `students`.`name`, 
-        `students`.`surname`, 
-        `groups`.`id` as 'group', 
-        `levels`.`level`, 
-        `cohorts`.`name` as 'cohort'
-    FROM `students` 
-    LEFT JOIN `groups` 
-        ON `groups`.`id` = `students`.`group_id`
-    INNER JOIN `levels` 
-        ON `levels`.`id` = `students`.`level_id`
-    INNER JOIN `cohorts` 
-        ON `cohorts`.`id` = `students`.`cohort_id`
+    SELECT `id`, `number`, `group_id` FROM `cubicles`;
 ");
 
 $sth->execute();
@@ -65,18 +78,13 @@ $sth->execute();
 while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     $table .= <<<EOT
 <tr>
-    <td>{$row['name']}</td>
-    <td>{$row['surname']}</td>
-    <td>{$row['group']}</td>
-    <td>{$row['level']}</td>
-    <td>{$row['cohort']}</td>
+    <td>{$row['number']}</td>
     <td>
-        <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='#' data-target='dropdown-student-{$row['id']}'><i class="material-icons">more_horiz</i></a>
-        <ul id='dropdown-student-{$row['id']}' class='dropdown-content'>
-            <li><a class="waves-effect" href="/leerling.php?leerling={$row['id']}">Bekijken</a></li>
-            <li><a class="waves-effect" href="/leerling/edit.php?student={$row['id']}">Aanpassen</a></li>
-            <li><a class="red white-text waves-effect waves-light" href="/leerling/destroy.php?student={$row['id']}">Verwijderen</a></li>
-        </ul>
+        <div class="input-field col s12">
+            <select class="cubicle" data-group="{$row['group_id']}" data-cubicle="{$row['id']}">
+                {$groups_select}
+            </select>
+        </div>
     </td>
 </tr>
 EOT;
@@ -88,5 +96,14 @@ echo $table;
                 </table>
             </div>
         </div>
+        <div class="input-field col s12">
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1"><a href="/">test</a></option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <label>Materialize Select</label>
+  </div>
     </body>
 </html>

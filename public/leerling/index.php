@@ -1,12 +1,12 @@
 <?php
 $root = __DIR__ . '\..\\..\\';
 require_once $root . 'app\\authorize.php';
+require_once $root . 'app\\pdo.php';
 ?>
 <html>
 <head>
     <?php 
         require_once $root . 'resources\\layouts\\head.php';
-        require_once $root . 'app\\pdo.php';
     ?>
     <script>
         $( function () {
