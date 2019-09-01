@@ -22,7 +22,7 @@ require_once $root . 'app\\authorize.php';
         ?>
         <div class="row">
             <div class="col m8 s12 offset-m2 center">
-                <h1>Leerlingen</h1>
+                <h1>Studenten</h1>
                 <a class="btn-floating btn-large waves-effect waves-light right" href="/leerling/create.php"><i class="material-icons">add</i></a>
             </div>
         </div>
