@@ -28,7 +28,7 @@ require_once $root . 'app\\authorize.php';
         </div>
         <div class="row">
             <div class="col m8 s12 offset-m2">
-                <table class="striped highlight">
+                <table class="striped responsive-table">
                     <thead>
                         <tr>
                             <th>Groep ID</th>
