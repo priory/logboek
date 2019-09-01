@@ -31,8 +31,7 @@ require_once $root . 'app\\authorize.php';
                 <table class="striped responsive-table">
                     <thead>
                         <tr>
-                            <th>Groep ID</th>
-                            <th>Naam groep</th>
+                            <th>Groep</th>
                             <th>Werkplek</th>
                             <th>Trimester</th>
                             <th>Jaar</th>                            
@@ -61,7 +60,6 @@ $sth->execute();
 while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     $table .= <<<EOT
 <tr>
-    <td>{$row['group_id']}</td>
     <td>{$row['group_name']}</td>
     <td>{$row['werkplek']}</td>
     <td>{$row['trimester']}</td>
@@ -69,7 +67,7 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     <td>
         <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='#' data-target='dropdown-group-{$row['group_id']}'><i class="material-icons">more_horiz</i></a>
         <ul id='dropdown-group-{$row['group_id']}' class='dropdown-content'>
-            <li><a class="waves-effect" href="#">Bekijken</a></li>
+            <li><a class="waves-effect" href="/groep.php/edit.php?group={$row['group_id']}">Bekijken</a></li>
             <li><a class="waves-effect" href="/groep/edit.php?group_id={$row['group_id']}">Aanpassen</a></li>
             <li><a class="red white-text waves-effect waves-light" href="/groep/destroy.php?group_id={$row['group_id']}">Verwijderen</a></li>
         </ul>

@@ -13,11 +13,19 @@ require_once $root . 'app\\authorize.php';
     require_once $root . 'resources\\layouts\\head.php';
     require_once $root . 'resources\\layouts\\log.php';
 
-    $query = $pdo->prepare("SELECT `cubicles`.`group_id` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek");
-    $query->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
-    $query->execute();
-    $group_id = $query->fetch(PDO::FETCH_ASSOC);
-    $group_id = $group_id['group_id'];
+    if (isset($_GET['werkplek'])) {
+        $query = $pdo->prepare("SELECT `cubicles`.`group_id` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek");
+        $query->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
+        $query->execute();
+        $group_id = $query->fetch(PDO::FETCH_ASSOC);
+        $group_id = $group_id['group_id'];
+    }
+
+    if (isset($_GET['group'])) {
+        $group_id = $_GET['group'];
+    }
+
+    error_log(print_r($group_id, true));
 ?>
 <script>
     $( function () {
@@ -31,17 +39,35 @@ require_once $root . 'app\\authorize.php';
     <?php
     require_once('../resources/layouts/nav.php');
 
-    $sth = $pdo->prepare("
-    SELECT `students`.`id` as `student_id`, `groups`.`id` as `group_id`, `students`.`name`, `students`.`surname`, `cohorts`.`name` as `cohort`, `levels`.`level`
-    FROM `students`
-    INNER JOIN `cohorts` ON `students`.`cohort_id`=`cohorts`.`id`
-    INNER JOIN `levels` ON `students`.`level_id`=`levels`.`id`
-    INNER JOIN `groups` ON `students`.`group_id`=`groups`.`id`
-    WHERE `groups`.`id` = (SELECT `cubicles`.`group_id` as `werkplek` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek)");
-    $sth->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_STR);
+    $sth = $pdo->prepare("SELECT `groups`.`name` FROM `groups` WHERE `id` = :group");
+    $sth->bindValue(':group', $group_id, PDO::PARAM_INT);
+    $sth->execute();
+
+    $group = $sth->fetch(PDO::FETCH_ASSOC);
+
+    echo "<h1>Groep: {$group['name']}</h1>";
+
+    if (isset($_GET['werkplek'])) {
+        $sth = $pdo->prepare("
+        SELECT `students`.`id` as `student_id`, `groups`.`id` as `group_id`, `students`.`name`, `students`.`surname`, `cohorts`.`name` as `cohort`, `levels`.`level`
+        FROM `students`
+        INNER JOIN `cohorts` ON `students`.`cohort_id`=`cohorts`.`id`
+        INNER JOIN `levels` ON `students`.`level_id`=`levels`.`id`
+        INNER JOIN `groups` ON `students`.`group_id`=`groups`.`id`
+        WHERE `groups`.`id` = (SELECT `cubicles`.`group_id` as `werkplek` FROM `cubicles` WHERE `cubicles`.`number` = :werkplek)");
+        $sth->bindValue(':werkplek', $_GET['werkplek'], PDO::PARAM_INT);
+    } else {
+        $sth = $pdo->prepare("
+        SELECT `students`.`id` as `student_id`, `groups`.`id` as `group_id`, `students`.`name`, `students`.`surname`, `cohorts`.`name` as `cohort`, `levels`.`level`
+        FROM `students`
+        INNER JOIN `cohorts` ON `students`.`cohort_id`=`cohorts`.`id`
+        INNER JOIN `levels` ON `students`.`level_id`=`levels`.`id`
+        INNER JOIN `groups` ON `students`.`group_id`=`groups`.`id`
+        WHERE `groups`.`id` = :group");
+        $sth->bindValue(':group', $group_id, PDO::PARAM_INT);
+    }
 
         $table[] = "
-            <h2>Werkplek ".$_GET['werkplek']."</h2>
             <table class='striped'>
                 <thead>
                     <tr>
@@ -61,7 +87,7 @@ require_once $root . 'app\\authorize.php';
                             <td>" . $row["surname"] . "</td>
                             <td>" . $row["cohort"] . "</td>
                             <td>" . $row["level"] . "</td>
-                            <td><a href='leerling.php?leerling=". $row['student_id']. "&groep=". $group_id ."'>log</a></td>
+                            <td><a href='/leerling.php?leerling=". $row['student_id']. "'>log</a></td>
                         </tr>";
         }
         

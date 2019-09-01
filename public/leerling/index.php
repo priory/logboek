@@ -48,7 +48,7 @@ $sth = $pdo->prepare("
         `students`.`id`, 
         `students`.`name`, 
         `students`.`surname`, 
-        `groups`.`id` as 'group', 
+        `groups`.`name` as 'group', 
         `levels`.`level`, 
         `cohorts`.`name` as 'cohort'
     FROM `students` 
