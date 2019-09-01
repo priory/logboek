@@ -25,14 +25,14 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 EOT;
 }
 
-$sth = $pdo->prepare("SELECT `id` FROM `groups`;");
+$sth = $pdo->prepare("SELECT `id`, `name` FROM `groups`;");
 $sth->execute();
 
 $groups .= '<option value="" selected></option>';
 
 while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     $groups .= <<<EOT
-<option value="{$row['id']}">{$row['id']}</option>';
+<option value="{$row['id']}">{$row['name']}</option>';
 EOT;
 }
 ?>

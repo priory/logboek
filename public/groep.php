@@ -24,8 +24,6 @@ require_once $root . 'app\\authorize.php';
     if (isset($_GET['group'])) {
         $group_id = $_GET['group'];
     }
-
-    error_log(print_r($group_id, true));
 ?>
 <script>
     $( function () {

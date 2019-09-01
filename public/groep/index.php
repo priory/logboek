@@ -67,7 +67,7 @@ while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     <td>
         <a class='dropdown-trigger btn btn-floating btn-small waves-effect waves-light grey' href='#' data-target='dropdown-group-{$row['group_id']}'><i class="material-icons">more_horiz</i></a>
         <ul id='dropdown-group-{$row['group_id']}' class='dropdown-content'>
-            <li><a class="waves-effect" href="/groep.php/edit.php?group={$row['group_id']}">Bekijken</a></li>
+            <li><a class="waves-effect" href="/groep.php?group={$row['group_id']}">Bekijken</a></li>
             <li><a class="waves-effect" href="/groep/edit.php?group_id={$row['group_id']}">Aanpassen</a></li>
             <li><a class="red white-text waves-effect waves-light" href="/groep/destroy.php?group_id={$row['group_id']}">Verwijderen</a></li>
         </ul>
